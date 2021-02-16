@@ -9,11 +9,11 @@ const App = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/chats/">
+        <Route path="/chats/:id?">
           <Chat state={state} dispatch={dispatch} />
         </Route>
         <Route path="/">
-          <p>olá mundo</p>
+          <h1>Página principal</h1>
         </Route>
       </Switch>
     </BrowserRouter>
