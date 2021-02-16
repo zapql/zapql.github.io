@@ -30,7 +30,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "storybook": "start-storybook",
-    "dev": "nodemon"
+    "dev": "nodemon -L"
   },
   "eslintConfig": {
     "extends": [
