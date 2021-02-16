@@ -2,7 +2,6 @@ import React, {FC} from 'react'
 import { useCallback, useState, useMemo } from 'react';
 import moment from 'moment';
 
-import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem'
 import Divider from '@material-ui/core/Divider';
@@ -53,7 +52,6 @@ const MessageDate = styled.div`
   font-size: 13px;
 `;
 
-
 const theme = createMuiTheme();
 
 interface ChatListProps {
@@ -72,12 +70,10 @@ const ChatList: FC<ChatListProps> = ({ data = [] }) => {
     //   );
 
     return (
-        <div>
-            <Drawer variant="permanent">
-            <ThemeProvider theme={theme}>
-                <DivToolbar />
-
-            </ThemeProvider>
+        <div data-testid="ChatDiv">
+                <ThemeProvider theme={theme}>
+                    <DivToolbar />
+                </ThemeProvider>
                 <Divider />
                 <List>
                     {data.map((chat) => (
@@ -108,8 +104,7 @@ const ChatList: FC<ChatListProps> = ({ data = [] }) => {
                     </ListItem>
                     ))}
                 </List>
-            </Drawer>
-        </div>
+            </div>
     )
 }
 
