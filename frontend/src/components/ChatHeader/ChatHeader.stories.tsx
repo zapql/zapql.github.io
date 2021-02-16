@@ -6,7 +6,7 @@ export default {
     component: ChatHeader
 }
 
-export const WhatsApp = () => (
+export const Header = () => (
     <ChatHeader></ChatHeader>
 )
 

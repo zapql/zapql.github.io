@@ -1,26 +1,11 @@
 import React, {FC} from 'react';
 
-// import IconButton from '@material-ui/core/IconButton';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-// import MenuIcon from '@material-ui/icons/Menu';
 import Typography from '@material-ui/core/Typography';
 
-import styled from 'styled-components';
-
-// const mapStateToProps = (state) => {
-//   return {
-//     pageName: state.header.pageName
-//   }
-// }
-
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     setPageName() {
-//       dispatch({type: "SET_PAGE_NAME"})
-//     }
-//   }
-// }
+import { createMuiTheme } from "@material-ui/core/styles";
+import styled, { ThemeProvider } from "styled-components";
 
 // --primary-bg: #2c6157
 // Nao esta aplicando
@@ -32,6 +17,8 @@ const Navbar = styled(AppBar)`
     position: absolute;
 `;
 
+const theme = createMuiTheme();
+
 interface HeaderProps {
     contactInfo?: string;
 }
@@ -39,6 +26,8 @@ interface HeaderProps {
 const ChatHeader: FC<HeaderProps> = ({ contactInfo="Gestor Messenger" }) => {
     return (
         <div>
+            <ThemeProvider theme={theme}>
+
             <Navbar>
                 <Toolbar>
                     <Typography component="h1" variant="h6" color="inherit" noWrap>
@@ -46,42 +35,9 @@ const ChatHeader: FC<HeaderProps> = ({ contactInfo="Gestor Messenger" }) => {
                     </Typography>
                 </Toolbar>
             </Navbar>
+            </ThemeProvider>
         </div>
     )
 }
 
-// class Header extends React.Component {
-//   constructor(props) {
-//     super(props)
-//     this.classes = this.props.classes
-//     this.open = props.open
-//     this.fixedHeightPaper = clsx(this.classes.paper, this.classes.fixedHeight);
-//   }
-  
-//   render() {
-//     return (
-//       <div>
-//         <AppBar position="absolute" className={clsx(this.classes.appBar, this.open && this.classes.appBarShift)}>
-//               <Toolbar className={this.classes.toolbar}>
-
-//                 {/* <IconButton
-//                   edge="start"
-//                   color="inherit"
-//                   aria-label="open drawer"
-//                   className={clsx(this.classes.menuButton, this.open && this.classes.menuButtonHidden)}
-//                 >
-//                   <MenuIcon />
-//                 </IconButton> */}
-
-//                 <Typography component="h1" variant="h6" color="inherit" noWrap className={this.classes.title}>
-//                   {this.props.pageName}
-//                 </Typography>
-//               </Toolbar>
-//             </AppBar>
-//       </div>
-//     )
-//   }
-// }
-
-// export default connect(mapStateToProps, mapDispatchToProps)(Header)
 export default ChatHeader
