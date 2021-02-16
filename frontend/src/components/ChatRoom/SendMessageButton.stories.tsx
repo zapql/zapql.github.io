@@ -6,9 +6,11 @@ export default {
     component: SendMessageButton
 }
 
-export const WhatsApp = () => (
+export const BotaoEnviar = () => (
     <SendMessageButton></SendMessageButton>
 )
+
+BotaoEnviar.storyName = "Botao Enviar"
 
 // export const ReceivedProps = () => (
 //     <SendMessageButton title="Titulo do Recebido"></SendMessageButton>
