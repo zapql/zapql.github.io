@@ -1,6 +1,6 @@
 {
-  "short_name": "Gestor Messenger",
-  "name": "Gestor Messenger Cliente",
+  "short_name": "React App",
+  "name": "Create React App Sample",
   "icons": [
     {
       "src": "favicon.ico",
