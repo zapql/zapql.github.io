@@ -3,6 +3,9 @@
   --secondary-bg: #6fd056;
   --primary-text: white;
   --secondary-text: white;
+  --primary-title: #525252;
+  --intro-secondary: rgba(0,0,0,0.45);
+  --intro-background: #f8f9fa;
 }
 
 body {
