@@ -9,8 +9,8 @@ import {
 } from 'react-router-dom';
 
 // Duas iteracoes com os mesmos componentes
-import Dashboard from './components/Dashboard';
-import CallService from './components/CallService';
+import Dashboard from './pages/Dashboard';
+import CallService from './pages/CallService';
 
 const redirectToDashboard = () => <Redirect to="/chats" />;
 

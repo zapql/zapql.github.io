@@ -1,6 +1,6 @@
 import React from 'react'
 import {CallServiceStories} from './index'
-import { chats } from '../ChatList/FakeDatabase'
+import { chats } from '../../components/ChatList/FakeDatabase'
 
 export default {
     title: "Telas",

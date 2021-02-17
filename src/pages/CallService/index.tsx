@@ -3,12 +3,12 @@ import React, {FC, useReducer} from 'react';
 // import ChatsList from './ChatsList';
 import styled from 'styled-components';
 import { History } from 'history';
-import ChatList from '../ChatList/ChatList';
-import ChatHeader from '../ChatRoom/ChatHeader';
-import MessageList from '../ChatRoom/MessageList';
-import MessageInput from '../ChatRoom/MessageInput';
+import ChatList from '../../components/ChatList/ChatList';
+import ChatHeader from '../../components/ChatRoom/ChatHeader';
+import MessageList from '../../components/ChatRoom/MessageList';
+import MessageInput from '../../components/ChatRoom/MessageInput';
 
-import { chats } from '../ChatList/FakeDatabase'
+import { chats } from '../../components/ChatList/FakeDatabase'
 
 const Container = styled.div`
   background: url(/assets/chat-background.jpg);
