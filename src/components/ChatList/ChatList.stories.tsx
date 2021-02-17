@@ -8,7 +8,7 @@ export default {
 }
 
 export const BasicChatList = () => (
-    <ChatList data={chats}></ChatList>
+    <ChatList chatListData={chats}></ChatList>
 )
 
 BasicChatList.storyName = "Lista de Contatos"
