@@ -2,7 +2,7 @@ import React, {FC, useReducer} from 'react';
 import { History } from 'history';
 
 import ChatList from '../../components/ChatList/ChatList';
-import { Row, Side, Main, Container, MainContainer, MainContainerIcon, MainContainerTextBox, FirstText, SecondText } from './DashboardStyle'
+import { Row, Side, Main, Container, MainContainer, MainContainerIcon, FirstText, SecondText } from './DashboardStyle'
 
 import { chats } from '../../components/ChatList/FakeDatabase'
 
