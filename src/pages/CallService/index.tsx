@@ -14,10 +14,13 @@ interface CallServiceProps {
     chatId: string
 }
 
-const CallService: React.FC<CallServiceProps> = ({ chatId, history }) => (
+const CallService: React.FC<CallServiceProps> = ({ chatId, history }) => {
+  console.log("Props:")
+  console.log(chatId)
+  return (
     <Row>
       <Side data-testid="Side">
-        <ChatList chatListData={chats} />
+        <ChatList chatListData={chats} history={history} />
       </Side>
       <Main data-testid="Main">
         <Container data-testid="CallServiceContainer">
@@ -27,28 +30,29 @@ const CallService: React.FC<CallServiceProps> = ({ chatId, history }) => (
           </Container>
       </Main>
     </Row>
-);
+)};
 
 export default CallService;
 
 // This interface and export is for Storybook use only.
-interface CallServiceStoriesProps {
-  chatListData: Array<any>,
-  chatHeaderData: {name: string, picture: string},
-  messageListData: Array<any>
-}
+// interface CallServiceStoriesProps {
+//   chatListData: Array<any>,
+//   chatHeaderData: {name: string, picture: string},
+//   messageListData: Array<any>,
+//   history: History
+// }
 
-export const CallServiceStories: React.FC<CallServiceStoriesProps> = ({chatListData = [], chatHeaderData = {name: "", picture: ""}, messageListData = []}) => (
-  <Row>
-    <Side data-testid="Side">
-      <ChatList chatListData={chatListData} />
-    </Side>
-    <Main data-testid="Main">
-      <Container data-testid="CallServiceContainer">
-          <ChatHeader chatHeaderData={chatHeaderData} />
-          <MessageList messageListData={messageListData} />
-          <MessageInput onSendMessage={() => true} />
-        </Container>
-    </Main>
-  </Row>
-);
+// export const CallServiceStories: React.FC<CallServiceStoriesProps> = ({chatListData = [], chatHeaderData = {name: "", picture: ""}, messageListData = [], history}) => (
+//   <Row>
+//     <Side data-testid="Side">
+//       <ChatList chatListData={chatListData} history={history} />
+//     </Side>
+//     <Main data-testid="Main">
+//       <Container data-testid="CallServiceContainer">
+//           <ChatHeader chatHeaderData={chatHeaderData} />
+//           <MessageList messageListData={messageListData} />
+//           <MessageInput onSendMessage={() => true} />
+//         </Container>
+//     </Main>
+//   </Row>
+// );
