@@ -1,24 +1,28 @@
 import React, {FC, useReducer} from 'react';
-// import { History } from 'history';
 
+import ChatList from '../../components/ChatList';
 import ChatRoom from '../../components/ChatRoom'
+import { Row, Side, Main, Container } from './style'
 
-import { chats } from '../../components/ChatList/FakeDatabase'
+import datazero from '../../store/datazero'
 
 interface CallServiceProps {
-    history: History,
     chatId: string
 }
 
-const CallService: React.FC<any> = ({}) => {
+const CallService: React.FC<CallServiceProps> = ({ chatId }) => {
   
   return (
-    <div>
-      <ChatRoom chatListData={chats}
-                history={{}}
-                />
-    </div>
-)};
+    <Row>
+      <Side id="Side" data-testid="Side">
+          <ChatList chatListData={datazero} />
+      </Side>
+      <Main data-testid="Main">
+          <ChatRoom chatListData={datazero} chatId={chatId} />
+      </Main>
+  </Row>
+  )
+};
 
 export default CallService;
 
