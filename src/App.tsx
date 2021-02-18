@@ -19,8 +19,8 @@ const App: React.FC = () => (
     <Switch>
       <Route exact path="/chats" component={Dashboard} />
       <Route exact path="/chats/:chatId" 
-        component={({ match, history }: RouteComponentProps<{ chatId: string }>) => (
-          <CallService chatId={match.params.chatId} history={history} />
+        component={({ match }: RouteComponentProps<{ chatId: string }>) => (
+          <CallService chatId={match.params.chatId} />
         )} />
     </Switch>
     <Route exact path="/" render={redirectToDashboard} />
