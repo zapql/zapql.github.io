@@ -63,7 +63,7 @@ ${(props: StyledProp) =>
 export const Contents = styled.div`
   padding: 5px 7px;
   word-wrap: break-word;
-  max-width: 60vh;
+  max-width: 80vh;
 
   &::after {
     content: ' \\00a0\\00a0\\00a0\\00a0\\00a0\\00a0\\00a0\\00a0\\00a0\\00a0\\00a0\\00a0\\00a0\\00a0\\00a0\\00a0\\00a0\\00a0\\00a0';

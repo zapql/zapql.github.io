@@ -10,6 +10,7 @@ interface MessageInputProps {
 const MessageInput: FC<any> = ( { submitMessage, message, onSendMessage } ) => {
     // Componente cuida apenas de seu proprio estado temporario.
     const [inputMessage, setInputMessage] = useState('');
+    
 
     const onKeyPress = (e: any) => {
         if (e.charCode === 13) {

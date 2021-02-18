@@ -6,15 +6,15 @@ interface MessageListProps {
     messageListData: Array<any>;
 }
 
-const MessageList: FC<MessageListProps> = ({ messageListData = [] }) => {
+const MessageList: FC<any> = ({ messageListData = [] }) => {
 
     return (
         <Container>
             {messageListData.map((message: any) => (
-                <MessageItem isMine={message.isMine} data-testid="message-item" key={message.id}>
-                <Contents data-testid="message-content">{message.content}</Contents>
+                <MessageItem isMine={message.isMine} data-testid="message-item" key={message.wid}>
+                <Contents data-testid="message-content">{message.msg}</Contents>
                 <Timestamp data-testid="message-date">
-                    {moment(message.createdAt).format('HH:mm')}
+                    {moment.unix(message.timestamp).format('HH:mm')}
                 </Timestamp>
                 </MessageItem>
             ))}

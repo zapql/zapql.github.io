@@ -1,56 +1,55 @@
 import React, { useState } from 'react'
 
-import ChatList from '../../components/ChatList/ChatList';
 import ChatHeader from '../../components/ChatRoom/ChatHeader';
 import MessageList from '../../components/ChatRoom/MessageList';
 import MessageInput from '../../components/ChatRoom/MessageInput';
-import { Row, Side, Main, Container } from './style'
+import { Container } from './style'
 
+// Funcao onClick no MessageInput
 function submitMessage(inputMessage: String, onSendMessage: Function, message: Array<JSON>, setInputMessage: Function) {
         if (!inputMessage) return;
+
+        setInputMessage(() => '')
         
         onSendMessage([...message,
             {
-                id: Math.random(),
+                wid: Math.random(),
                 isMine: true,
-                content: inputMessage,
-                createdAt: new Date(),
+                msg: inputMessage,
+                timestamp: Date.now(),
             }
         ]);
-
-        // Limpa o input para nova mensagem
-        setInputMessage(() => '')
     };
 
-const initialState = [{
-        id: 1,
-        content: "foo",
-        createdAt: new Date(),
-    }]
-
 const ChatRoom: React.FC<any> = ({ 
+    chatId,
     chatListData, 
     history, 
     chatHeaderData,
     messageListData,
-    onSendMessage
-    }) => {
+    onSendMessage }) => {
+
     
-    const [message, sendMessage] = useState(initialState)
+
+    const contactList = Object.entries(chatListData.contacts)
+    const messageList = Object.entries(chatListData.chats)
     
+    let chatData = contactList.map((item, i) => Object.assign(
+        {}, 
+        {id: item[0]}, 
+        {info: item[1]}, 
+        {messages: messageList[i][1]}
+    )).find((chat) => chat.id === chatId)
+
+    const [message, sendMessage] = useState(chatData!.messages)
+
+    // console.log(React.props)
     return (
-        <Row>
-            <Side data-testid="Side">
-                <ChatList chatListData={chatListData} history={history} />
-            </Side>
-            <Main data-testid="Main">
-                <Container data-testid="CallServiceContainer">
-                    <ChatHeader chatHeaderData={{}} />
-                    <MessageList messageListData={message} />
-                    <MessageInput submitMessage={submitMessage} message={message} onSendMessage={sendMessage} />
-                </Container>
-            </Main>
-        </Row>
+        <Container data-testid="CallServiceContainer">
+            <ChatHeader chatHeaderData={chatData!.info} />
+            <MessageList messageListData={chatData!.messages} />
+            <MessageInput submitMessage={submitMessage} message={message} onSendMessage={sendMessage} />
+        </Container>
     )
 }
 
