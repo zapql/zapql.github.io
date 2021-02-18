@@ -1,20 +1,33 @@
-import React, {FC, useReducer} from 'react';
+import React, {FC, useEffect, useReducer} from 'react';
 import { History } from 'history';
 
 import ChatList from '../../components/ChatList/ChatList';
 import { Row, Side, Main, Container, MainContainer, MainContainerIcon, FirstText, SecondText } from './DashboardStyle'
 
-import { chats } from '../../components/ChatList/FakeDatabase'
+import reducer from '../../store/reducers'
+import { ACTIONS } from '../../store/actions'
 
 interface DashboardProps {
-    history: History,
-    chatId: string
+    history: History;
 }
 
-const Dashboard: React.FC<DashboardProps> = ({ chatId, history }) => (
+const initialState = {
+  chatListData: []
+}
+
+// quer que feche e abra outra vez? nao sei se era o que tu queria
+// pera ae
+const Dashboard: React.FC<DashboardProps> = ({ history }) => {
+  const [state, dispatch] = useReducer(reducer, initialState)
+
+  useEffect(() => {
+    dispatch({ type: ACTIONS.GET_CHAT })
+  }, [])
+
+  return (
     <Row>
       <Side data-testid="Side">
-        <ChatList chatListData={chats} />
+        <ChatList chatListData={[]} history={history} />
       </Side>
       <Main data-testid="Main">
         <Container data-testid="DashboardContainer">
@@ -28,6 +41,6 @@ const Dashboard: React.FC<DashboardProps> = ({ chatId, history }) => (
           </Container>
       </Main>
     </Row>
-);
+)};
 
 export default Dashboard;
