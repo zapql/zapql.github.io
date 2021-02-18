@@ -2,34 +2,23 @@ import React, {FC, useReducer, useState} from 'react'
 import SendIcon from './SendMessageButton'
 import { Container, ActualInput, SendButton } from './MessageInputStyle'
 
-const initialState = {}
-
 interface MessageInputProps {
+    message: string,
     onSendMessage(content: string): any;
 }
 
-// TODO: Componentes devem receber apenas props
-const MessageInput: FC<MessageInputProps> = ( { onSendMessage } ) => {
-    const [message, setMessage] = useState('');
+const MessageInput: FC<any> = ( { submitMessage, message, onSendMessage } ) => {
+    // Componente cuida apenas de seu proprio estado temporario.
+    const [inputMessage, setInputMessage] = useState('');
 
     const onKeyPress = (e: any) => {
         if (e.charCode === 13) {
-          submitMessage();
+          return submitMessage(inputMessage, onSendMessage, message, setInputMessage);
         }
       };
 
     const onChange = ({ target }: any) => {
-        setMessage(target.value);
-    };
-
-    const submitMessage = () => {
-        if (!message) return;
-
-        setMessage('');
-
-        if (typeof onSendMessage === 'function') {
-            onSendMessage(message);
-        }
+        setInputMessage(target.value);
     };
 
     return (
@@ -38,7 +27,7 @@ const MessageInput: FC<MessageInputProps> = ( { onSendMessage } ) => {
                 data-testid="message-input"
                 type="text"
                 placeholder="Type a message"
-                value={message}
+                value={inputMessage}
                 onKeyPress={onKeyPress}
                 onChange={onChange}
             />
@@ -46,7 +35,7 @@ const MessageInput: FC<MessageInputProps> = ( { onSendMessage } ) => {
                 data-testid="send-button"
                 variant="contained"
                 color="primary"
-                onClick={submitMessage}>
+                onClick={() => submitMessage(inputMessage, onSendMessage, message, setInputMessage)}>
                 <SendIcon />
             </SendButton>
         </Container>
