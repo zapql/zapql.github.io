@@ -1,5 +1,14 @@
 import styled from "styled-components";
 
+// TODO: Detectar resize da janela, e ocultar "Side" (ChatList)
+export const Container = styled.div`
+  @media (max-width: 30em) {
+    #Side {
+      visibility: collapse;
+    }
+  }
+`
+
 // esse theme.mixins.toolbar cria o recuo vazio na parte de cima
 export const DivToolbar = styled.div`
     min-height: 10vh;
