@@ -6,30 +6,22 @@ import MessageInput from '../../components/ChatRoom/MessageInput';
 import { Container } from './style'
 
 // Funcao onClick no MessageInput
-function submitMessage(inputMessage: String, onSendMessage: Function, message: Array<JSON>, setInputMessage: Function) {
-        if (!inputMessage) return;
+function messageInputOnClick(MessageInputLocalState: String, sendMessage: Function, setInputMessage: Function, messageListState: Array<any>) {
+    if (!MessageInputLocalState) return;
 
-        setInputMessage(() => '')
-        
-        onSendMessage([...message,
-            {
-                wid: Math.random(),
-                isMine: true,
-                msg: inputMessage,
-                timestamp: Date.now(),
-            }
-        ]);
-    };
-
-const ChatRoom: React.FC<any> = ({ 
-    chatId,
-    chatListData, 
-    history, 
-    chatHeaderData,
-    messageListData,
-    onSendMessage }) => {
-
+    setInputMessage(() => '')
     
+    sendMessage([...messageListState,
+        {
+            wid: Math.random(),
+            isMine: true,
+            msg: MessageInputLocalState,
+            timestamp: Math.floor(Date.now() / 1000),
+        }
+    ]);
+};
+
+const ChatRoom: React.FC<any> = ({ chatId, chatListData, history, chatHeaderData, messageListData, onSendMessage }) => {
 
     const contactList = Object.entries(chatListData.contacts)
     const messageList = Object.entries(chatListData.chats)
@@ -41,14 +33,13 @@ const ChatRoom: React.FC<any> = ({
         {messages: messageList[i][1]}
     )).find((chat) => chat.id === chatId)
 
-    const [message, sendMessage] = useState(chatData!.messages)
+    const [messageListState, sendMessage] = useState(chatData!.messages)
 
-    // console.log(React.props)
     return (
         <Container data-testid="CallServiceContainer">
             <ChatHeader chatHeaderData={chatData!.info} />
-            <MessageList messageListData={chatData!.messages} />
-            <MessageInput submitMessage={submitMessage} message={message} onSendMessage={sendMessage} />
+            <MessageList messageListData={messageListState} />
+            <MessageInput messageInputOnClick={messageInputOnClick} sendMessage={sendMessage} messageListState={messageListState} />
         </Container>
     )
 }
