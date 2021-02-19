@@ -11,7 +11,7 @@ function messageInputOnClick(MessageInputLocalState: String, sendMessage: Functi
 
     setInputMessage(() => '')
     
-    sendMessage([...messageListState,
+    sendMessage((previousState: any) => [...previousState,
         {
             wid: Math.random(),
             isMine: true,
@@ -44,7 +44,7 @@ const ChatRoom: React.FC<any> = ({ chatId, chatListData, chatHeaderData, message
         <Container data-testid="CallServiceContainer">
             <ChatHeader chatHeaderData={chatData!.info} />
             <MessageList messageListData={messageListState} />
-            <MessageInput messageInputOnClick={messageInputOnClick} sendMessage={sendMessage} messageListState={messageListState} />
+            <MessageInput messageInputOnClick={messageInputOnClick} sendMessage={sendMessage} />
         </Container>
     )
 }

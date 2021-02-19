@@ -7,14 +7,14 @@ interface MessageInputProps {
     onSendMessage(content: string): any;
 }
 
-const MessageInput: FC<any> = ( { messageInputOnClick, sendMessage, messageListState } ) => {
+const MessageInput: FC<any> = ( { messageInputOnClick, sendMessage } ) => {
     // Componente cuida apenas de seu proprio estado temporario.
     const [MessageInputLocalState, setInputMessage] = useState('');
     
 
     const onKeyPress = (e: any) => {
         if (e.charCode === 13) {
-          return messageInputOnClick(MessageInputLocalState, sendMessage, setInputMessage, messageListState)
+          return messageInputOnClick(MessageInputLocalState, sendMessage, setInputMessage )
         }
       };
 
@@ -36,7 +36,7 @@ const MessageInput: FC<any> = ( { messageInputOnClick, sendMessage, messageListS
                 data-testid="send-button"
                 // variant="contained"
                 // color="primary"
-                onClick={() => messageInputOnClick(MessageInputLocalState, sendMessage, setInputMessage, messageListState)}>
+                onClick={() => messageInputOnClick(MessageInputLocalState, sendMessage, setInputMessage )}>
                 <SendIcon />
             </SendButton>
         </Container>
