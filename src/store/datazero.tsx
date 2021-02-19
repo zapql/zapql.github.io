@@ -4,12 +4,12 @@ const datazero = {
       554498455712: {
         name: 'Jackson',
         status: 'Understand however that every man is worth just so much as the things are worth about which he busies himself.',
-        avatar: 'https://pps.whatsapp.net/v/t61.24694-24/65053408_665188787278170_5401355638863298560_n.jpg?oh=856dfbdab9707c52a3b54b6c62217ed8&oe=602F4259',
+        avatar: 'https://373819-1169963-raikfcquaxqncofqfm.stackpathdns.com/wp-content/uploads/2016/07/epictetus.jpg',
       },
       556599375661: {
         name: 'Itacir Gabral',
         status: '🤔',
-        avatar: 'https://pps.whatsapp.net/v/t61.24694-24/56153820_327607791272655_2803856312704696320_n.jpg?oh=e92720ff78c3d13b9149c1f626ace980&oe=602EE92F',
+        avatar: 'https://images-na.ssl-images-amazon.com/images/I/81eUW9G6mML.jpg',
       },
     },
     chats: {
