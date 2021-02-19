@@ -10,13 +10,13 @@ interface CallServiceProps {
     chatId: string
 }
 
+/**
+ * TODO: useEffect com Promise.
+ * Se retornar query valida no banco, renderiza os componentes.
+ * Senao, useHistory().push("/chats"), nao deve poder acessar numero invalido.
+ */
 const CallService: React.FC<CallServiceProps> = ({ chatId }) => {
-  /**
-   * TODO: useEffect com Promise.
-   * Se retornar query valida no banco, renderiza os componentes.
-   * Senao, useHistory().push("/chats"), nao deve poder acessar numero invalido.
-   */
-  console.log("CallService chatId: ", chatId)
+  
   return (
     <Row>
       <Side id="Side" data-testid="Side">
@@ -30,26 +30,3 @@ const CallService: React.FC<CallServiceProps> = ({ chatId }) => {
 };
 
 export default CallService;
-
-// This interface and export is for Storybook use only.
-// interface CallServiceStoriesProps {
-//   chatListData: Array<any>,
-//   chatHeaderData: {name: string, picture: string},
-//   messageListData: Array<any>,
-//   history: History
-// }
-
-// export const CallServiceStories: React.FC<CallServiceStoriesProps> = ({chatListData = [], chatHeaderData = {name: "", picture: ""}, messageListData = [], history}) => (
-//   <Row>
-//     <Side data-testid="Side">
-//       <ChatList chatListData={chatListData} history={history} />
-//     </Side>
-//     <Main data-testid="Main">
-//       <Container data-testid="CallServiceContainer">
-//           <ChatHeader chatHeaderData={chatHeaderData} />
-//           <MessageList messageListData={messageListData} />
-//           <MessageInput onSendMessage={() => true} />
-//         </Container>
-//     </Main>
-//   </Row>
-// );

@@ -2,7 +2,7 @@ import React from 'react'
 import MessageInput from './MessageInput'
 
 export default {
-    title: "Sala de Chat",
+    title: "Componentes",
     component: MessageInput
 }
 

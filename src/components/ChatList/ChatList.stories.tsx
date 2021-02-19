@@ -1,17 +1,15 @@
-// import React from 'react'
-// import ChatList from './ChatList'
-// import { chats } from './FakeDatabase'
-// import History from 'history'
+import React from 'react'
+import { ChatListStorybook } from './index'
 
-// export default {
-//     title: "Componentes Gerais",
-//     component: ChatList
-// }
+import datazero from '../../store/datazero'
 
-// export const BasicChatList = () => (
-//     <ChatList chatListData={chats} history={history}></ChatList>
-// )
+export default {
+    title: "Componentes",
+    component: ChatListStorybook
+}
 
-// BasicChatList.storyName = "Lista de Contatos"
+export const BasicChatList = () => (
+    <ChatListStorybook chatListData={datazero}></ChatListStorybook>
+)
 
-export {}
+BasicChatList.storyName = "Lista de Contatos"
