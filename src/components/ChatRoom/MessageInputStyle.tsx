@@ -2,10 +2,15 @@ import { Button } from '@material-ui/core'
 import styled from 'styled-components'
 
 export const Container = styled.div`
+  background-color: var(--rich-text-panel-background);
   display: flex;
   height: 50px;
-  padding: 5px;
-  width: calc(100% - 10px);
+  border-left: 30px;
+  padding-top: 1.5vh;
+  padding-bottom: 1.5vh;
+  padding-left: 1.5vh;
+  padding-right: 1.5vh;
+  width: calc(100% - 3vh);
 `;
 
 export const ActualInput = styled.input`
@@ -26,12 +31,12 @@ export const SendButton = styled(Button)`
   min-width: 50px !important;
   width: 50px !important;
   border-radius: 999px !important;
-  background-color: var(--primary-bg) !important;
+  background-color: var(--rich-text-panel-background) !important;
   margin: 0 5px !important;
   margin-right: 0 !important;
-  color: white !important;
+  color: var(--icon) !important;
   padding-left: 20px !important;
-
+  
   svg {
     margin-left: -3px;
   }

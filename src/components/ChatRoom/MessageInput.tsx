@@ -34,8 +34,8 @@ const MessageInput: FC<any> = ( { messageInputOnClick, sendMessage, messageListS
             />
             <SendButton
                 data-testid="send-button"
-                variant="contained"
-                color="primary"
+                // variant="contained"
+                // color="primary"
                 onClick={() => messageInputOnClick(MessageInputLocalState, sendMessage, setInputMessage, messageListState)}>
                 <SendIcon />
             </SendButton>

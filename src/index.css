@@ -6,6 +6,8 @@
   --primary-title: #525252;
   --intro-secondary: rgba(0,0,0,0.45);
   --intro-background: #f8f9fa;
+  --rich-text-panel-background: #f0f0f0;
+  --icon: #919191;
 }
 
 body {

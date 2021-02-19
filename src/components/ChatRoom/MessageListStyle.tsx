@@ -4,7 +4,7 @@ export const Container = styled.div`
   display: block;
   flex: 2;
   overflow-y: overlay;
-  padding: 0 15px;
+  padding: 0 14vh;
 `;
 
 type StyledProp = {

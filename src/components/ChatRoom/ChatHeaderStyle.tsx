@@ -24,7 +24,7 @@ export const Picture = styled.img`
   height: 40px;
   width: 40px;
   margin-top: 3px;
-  margin-left: -22px;
+  margin-left: -1vh;
   object-fit: cover;
   padding: 5px;
   border-radius: 50%;
@@ -32,4 +32,5 @@ export const Picture = styled.img`
 
 export const Name = styled.div`
   line-height: 56px;
+  margin-left: 1vh;
 `;
