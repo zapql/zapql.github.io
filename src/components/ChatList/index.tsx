@@ -5,7 +5,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem'
 import Divider from '@material-ui/core/Divider';
 import { DivToolbar, ChatPicture, ChatInfo, ChatName, MessageContent, MessageDate, Container } from './style'
-import { useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 interface ChatListProps {
     chatListData: {
@@ -22,7 +22,6 @@ interface ChatListProps {
 }
 
 const ChatList: FC<ChatListProps> = ({ chatListData = {contacts: {}, chats: {}} }) => {
-    let history = useHistory()
     
     const contactList = Object.entries(chatListData.contacts)
     const messageList = Object.entries(chatListData.chats)
@@ -34,13 +33,6 @@ const ChatList: FC<ChatListProps> = ({ chatListData = {contacts: {}, chats: {}} 
         {messages: messageList[i][1]}
     ))
 
-    const navToChat = useCallback(
-        (chat) => {
-          history.push(`/chats/${chat}`);
-        },
-        [history]
-      );
-
     return(
         <Container data-testid="ChatDiv">
                 <DivToolbar />
@@ -51,7 +43,8 @@ const ChatList: FC<ChatListProps> = ({ chatListData = {contacts: {}, chats: {}} 
                         key={contact.id}
                         data-testid="chat"
                         button
-                        onClick={navToChat.bind(null, contact.id)}
+                        component={Link}
+                        to={`/chats/${contact.id}`}
                         >
                         <ChatPicture
                         data-testid="picture"

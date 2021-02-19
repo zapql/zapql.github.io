@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import ChatHeader from '../../components/ChatRoom/ChatHeader';
 import MessageList from '../../components/ChatRoom/MessageList';
@@ -21,7 +21,7 @@ function messageInputOnClick(MessageInputLocalState: String, sendMessage: Functi
     ]);
 };
 
-const ChatRoom: React.FC<any> = ({ chatId, chatListData, history, chatHeaderData, messageListData, onSendMessage }) => {
+const ChatRoom: React.FC<any> = ({ chatId, chatListData, chatHeaderData, messageListData, onSendMessage }) => {
 
     const contactList = Object.entries(chatListData.contacts)
     const messageList = Object.entries(chatListData.chats)
@@ -34,7 +34,12 @@ const ChatRoom: React.FC<any> = ({ chatId, chatListData, history, chatHeaderData
     )).find((chat) => chat.id === chatId)
 
     const [messageListState, sendMessage] = useState(chatData!.messages)
-
+    
+    useEffect(() => {
+        // Quando chatId muda, altera o estado
+        sendMessage(chatData!.messages)
+    }, [chatId])
+    
     return (
         <Container data-testid="CallServiceContainer">
             <ChatHeader chatHeaderData={chatData!.info} />

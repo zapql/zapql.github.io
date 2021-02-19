@@ -11,7 +11,12 @@ interface CallServiceProps {
 }
 
 const CallService: React.FC<CallServiceProps> = ({ chatId }) => {
-  
+  /**
+   * TODO: useEffect com Promise.
+   * Se retornar query valida no banco, renderiza os componentes.
+   * Senao, useHistory().push("/chats"), nao deve poder acessar numero invalido.
+   */
+  console.log("CallService chatId: ", chatId)
   return (
     <Row>
       <Side id="Side" data-testid="Side">
