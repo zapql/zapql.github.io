@@ -1,0 +1,675 @@
+{
+	"info": {
+		"_postman_id": "e8791abf-9b31-4caa-9108-341e289687ce",
+		"name": "GMapi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "send",
+			"item": [
+				{
+					"name": "sendtextmessage",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"to\": \"556599375661\",\n    \"msg\": \"fi 3\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/sendtextmessage",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"sendtextmessage"
+							],
+							"query": [
+								{
+									"key": "quote",
+									"value": "3EB00B948C28",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sendcontactmessage",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"to\": \"556596910295\",\n    \"vcard\": \"BEGIN:VCARD\\nVERSION:3.0\\nFN:GM BOT\\nORG:Gestor Sistemas;\\nTEL;type=CELL;type=VOICE;waid=556596910295:+55 (65) 9 9691-0295\\nEND:VCARD\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/sendcontactmessage",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"sendcontactmessage"
+							],
+							"query": [
+								{
+									"key": "quote",
+									"value": "EC06CB4A4D3BF2FE725D9394CFB9C0B9",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sendlocationmessage",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"to\": \"556596910295\",\n    \"description\": \"Orgamec no mapa\",\n    \"latitude\": -15.62468597152293,\n    \"longitude\": -56.09824301631588\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/sendlocationmessage",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"sendlocationmessage"
+							],
+							"query": [
+								{
+									"key": "quote",
+									"value": "EC06CB4A4D3BF2FE725D9394CFB9C0B9",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "senddocumentmessage",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/home/itacirgabral/source/baipoc/doc.pdf"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/senddocumentmessage/:to",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"senddocumentmessage",
+								":to"
+							],
+							"query": [
+								{
+									"key": "quote",
+									"value": "EC06CB4A4D3BF2FE725D9394CFB9C0B9",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "to",
+									"value": "556596910295"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sendaudiomessage",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/home/itacirgabral/source/baipoc/audio.ogg"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/sendaudiomessage/:to",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"sendaudiomessage",
+								":to"
+							],
+							"query": [
+								{
+									"key": "quote",
+									"value": "EC06CB4A4D3BF2FE725D9394CFB9C0B9",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "to",
+									"value": "556596910295"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sendimagemessage",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/home/itacirgabral/Pictures/margaret-hamilton-mit-apollo-code_0.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/sendimagemessage/:to",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"sendimagemessage",
+								":to"
+							],
+							"query": [
+								{
+									"key": "quote",
+									"value": "EC06CB4A4D3BF2FE725D9394CFB9C0B9",
+									"disabled": true
+								},
+								{
+									"key": "caption",
+									"value": "The fifo's drummer",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "to",
+									"value": "",
+									"type": "string"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "forwardmessage",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"to\": [\n        \"556596910295\",\n        \"556593552936\",\n        \"556593471268\",\n        \"556596910295\",\n        \"556596910295\",\n        \"556596910295\",\n        \"not already talked to\"\n    ],\n    \"source\": \"556596910295\",\n    \"wid\": \"3EB059B9D4EA\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/forwardmessage",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"forwardmessage"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sendmediamessage",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"to\": \"556593471268\",\n    \"link\": \"https://firebasestorage.googleapis.com/v0/b/gestor-messenger.appspot.com/o/files%2Fcompany%2F76%2Faudio-2021-02-17t20-24-41-710z.ogg?alt=media&token=3dd6a5dc-ccf7-45e9-aea1-659722eddc8c\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/sendmediamessage",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"sendmediamessage"
+							],
+							"query": [
+								{
+									"key": "quote",
+									"value": "EC06CB4A4D3BF2FE725D9394CFB9C0B9",
+									"disabled": true
+								},
+								{
+									"key": "caption",
+									"value": "The fifo's drummer",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "webhook",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"webhook\": \"https://fdbdb34af9cf.ngrok.io/\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/webhook",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"webhook"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "read",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/webhook",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"webhook"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"webhook\": \"https://42d9da335a3d.ngrok.io/\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/webhook",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"webhook"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/webhook",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"webhook"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "history",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/webhook/history",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"webhook",
+								"history"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "contacts",
+			"item": [
+				{
+					"name": "allcontacts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/allcontacts",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"allcontacts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "alreadytalkedto",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/alreadytalkedto/:number",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"alreadytalkedto",
+								":number"
+							],
+							"variable": [
+								{
+									"key": "number",
+									"value": "556599375661"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "contactinfo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": [\n        \"556599375661\",\n        \"556599375661\",\n        \"556599375661\",\n        \"556599375661\",\n        \"556581469561\",\n        \"556593471268\",\n        \"556593552936\",\n        \"123412341234\"\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/contactinfo",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"contactinfo"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "helloworld",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "signupconnection",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"url\": \"https://62828e2c37d4.ngrok.io\",\n    \"shard\": \"556599375661\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/signupconnection",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"signupconnection"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "connect",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/connect",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"connect"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "stats",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/stats",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"stats"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "queuerestart",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/queuerestart",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"queuerestart"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "spreadrestart",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/spreadrestart",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"spreadrestart"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "connectionstate",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/connectionstate",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"connectionstate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "disconnect",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/disconnect",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"disconnect"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{jwt}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

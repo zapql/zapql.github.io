@@ -1,0 +1,684 @@
+{
+	"info": {
+		"_postman_id": "c804a36d-3bd1-4e7d-9c23-ed06a50af39a",
+		"name": "fakehook",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "qrcode",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"type\": \"qr\",\n    \"qr\": \"1@JmcciH4ex8Mi3X3VLm+le+zeWJtTbL2I6HvLReHieByl+VvM2GQvLQm4Wb0OVeMntm7vJGA/7YCGKw==,Z+Bkg8RbkDZ0TA2qugaZervpOJ0k+EgbV27X0ddtYS4=,dySLIPDeon0mvDP+euM32g==\",\n    \"attempts\": 5\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/secretcode/123412341234",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"secretcode",
+						"123412341234"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "jwt",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n​​    \"type\": \"jwt\",\n    \"jwt\": \"xxx.yyy.zzz\",\n    \"userinfo\": {​​\n        \"number\": \"123412341234\",\n        \"name\": \"User Name\",\n        \"avatar\": \"https://pps.whatsapp.net/usernameavatar\"\n    }​​\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/secretcode/123412341234",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"secretcode",
+						"123412341234"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "mismatch",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"type\": \"error\",\n    \"message\": \"mismatch numbers\",\n    \"wanted\": \"123412341234\",\n    \"found\": \"432143214321\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/secretcode/123412341234",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"secretcode",
+						"123412341234"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "textMessage",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"type\": \"textMessage\",\n    \"timestamp\": \"1613050567\",\n    \"to\": \"123412341234\",\n    \"from\": \"43214321\",\n    \"msg\": \"oi\",\n    \"quoted\": \"B493BC3950756A0F9527FA27008DBD14\",\n    \"wid\": \"5D08256C64B765E3348DF97E7789860D\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/secretcode/123412341234",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"secretcode",
+						"123412341234"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "locationMessage",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"type\": \"locationMessage\",\n    \"timestamp\": \"1613050567\",\n    \"to\": \"432143214321\",\n    \"from\": \"123412341234\",\n    \"quoted\": \"B493BC3950756A0F9527FA27008DBD14\",\n    \"wid\": \"D97FAE57AB6D62F90F20D986E51D9008\",\n    \"description\": \"Orgamec consultoria contábil\",\n    \"latitude\": -15.977138,\n    \"longitude\": -54.9692727\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/secretcode/123412341234",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"secretcode",
+						"123412341234"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "contactMessage",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"type\": \"contactMessage\",\n    \"timestamp\": \"1613050567\",\n    \"to\": \"123412341234\",\n    \"from\": \"432143214321\",\n    \"vcard\": \"BEGIN:VCARD\\nVERSION:3.0\\nFN:GM BOT\\nORG:Gestor Sistemas;\\nTEL;type=CELL;type=VOICE;waid=556596910295:+55 (65) 9 9691-0295\\nEND:VCARD\",\n    \"wid\": \"B4CF2659C50FF52C20AAAA86E4228545\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/secretcode/123412341234",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"secretcode",
+						"123412341234"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "imageMessage",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "image",
+							"type": "file",
+							"src": []
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/secretcode/123412341234?from=432143214321&mimetype=image/jpeg&quoted=B493BC3950756A0F9527FA27008DBD14&size=52768&to=123412341234&type=imageMessage&wid=49ACC61AF15A25E73C801381E8849089&timestamp=1613050567",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"secretcode",
+						"123412341234"
+					],
+					"query": [
+						{
+							"key": "from",
+							"value": "432143214321"
+						},
+						{
+							"key": "mimetype",
+							"value": "image/jpeg"
+						},
+						{
+							"key": "quoted",
+							"value": "B493BC3950756A0F9527FA27008DBD14"
+						},
+						{
+							"key": "size",
+							"value": "52768"
+						},
+						{
+							"key": "to",
+							"value": "123412341234"
+						},
+						{
+							"key": "type",
+							"value": "imageMessage"
+						},
+						{
+							"key": "wid",
+							"value": "49ACC61AF15A25E73C801381E8849089"
+						},
+						{
+							"key": "timestamp",
+							"value": "1613050567"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "documentMessage",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "document",
+							"type": "file",
+							"src": []
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/secretcode/123412341234?from=43214321&mimetype=image/jpeg&quoted=B493BC3950756A0F9527FA27008DBD14&size=52768&to=123412341234&type=imageMessage&wid=49ACC61AF15A25E73C801381E8849089&filename=doc.pdf&timestamp=1613050567",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"secretcode",
+						"123412341234"
+					],
+					"query": [
+						{
+							"key": "from",
+							"value": "43214321"
+						},
+						{
+							"key": "mimetype",
+							"value": "image/jpeg"
+						},
+						{
+							"key": "quoted",
+							"value": "B493BC3950756A0F9527FA27008DBD14"
+						},
+						{
+							"key": "size",
+							"value": "52768"
+						},
+						{
+							"key": "to",
+							"value": "123412341234"
+						},
+						{
+							"key": "type",
+							"value": "imageMessage"
+						},
+						{
+							"key": "wid",
+							"value": "49ACC61AF15A25E73C801381E8849089"
+						},
+						{
+							"key": "filename",
+							"value": "doc.pdf"
+						},
+						{
+							"key": "timestamp",
+							"value": "1613050567"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "audioMessage",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "document",
+							"type": "file",
+							"src": []
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/secretcode/123412341234?from=432143214321&mimetype=audio/ogg; codecs=opus&quoted=B493BC3950756A0F9527FA27008DBD14&size=52768&to=123412341234&type=audioMessage&wid=49ACC61AF15A25E73C801381E8849089&timestamp=1613050567",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"secretcode",
+						"123412341234"
+					],
+					"query": [
+						{
+							"key": "from",
+							"value": "432143214321"
+						},
+						{
+							"key": "mimetype",
+							"value": "audio/ogg; codecs=opus"
+						},
+						{
+							"key": "quoted",
+							"value": "B493BC3950756A0F9527FA27008DBD14"
+						},
+						{
+							"key": "size",
+							"value": "52768"
+						},
+						{
+							"key": "to",
+							"value": "123412341234"
+						},
+						{
+							"key": "type",
+							"value": "audioMessage"
+						},
+						{
+							"key": "wid",
+							"value": "49ACC61AF15A25E73C801381E8849089"
+						},
+						{
+							"key": "timestamp",
+							"value": "1613050567"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sent",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"type\": \"sent\",\n    \"timestamp\": 1611512167665,\n    \"to\": \"432143214321\",\n    \"from\": \"123412341234\",\n    \"wid\": \"3EB06589C860\",\n    \"mark\": \"2dn2IKfV7bQ=\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/secretcode/123412341234",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"secretcode",
+						"123412341234"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "received",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"type\": \"received\",\n    \"timestamp\": 1611512189000,\n    \"to\": \"432143214321\",\n    \"from\": \"123412341234\",\n    \"wid\": \"3EB06589C860\",\n    \"mark\": \"2dn2IKfV7bQ=\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/secretcode/123412341234",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"secretcode",
+						"123412341234"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "read",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"type\": \"read\",\n    \"timestamp\": 1611512224000,\n    \"to\": \"43214321\",\n    \"from\": \"123412341234\",\n    \"wid\": \"3EB06589C860\",\n    \"mark\": \"2dn2IKfV7bQ=\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/secretcode/123412341234",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"secretcode",
+						"123412341234"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "opened",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"type\": \"opened\",\n    \"shard\": \"123412341234\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/secretcode/123412341234",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"secretcode",
+						"123412341234"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "new contact",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"type\": \"new contact\",\n    \"shard\": \"123412341234\",\n    \"number\": \"432143214321\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/secretcode/123412341234",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"secretcode",
+						"123412341234"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "closed",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"type\": \"closed\",\n    \"shard\": \"123412341234\",\n    \"reason\": \"intentional\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/secretcode/123412341234",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"secretcode",
+						"123412341234"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "uncongested",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"type\": \"uncongested queue\",\n    \"lost\": [\n        {\n            \"type\": \"textMessage_v001\",\n            \"mark\": \"bPqvHkbWm8g=\",\n            \"jid\": \"556596910295@s.whatsapp.net\",\n            \"msg\": \"PEA 3\"\n        },\n        {\n            \"type\": \"textMessage_v001\",\n            \"mark\": \"WuAu2vN6+gg=\",\n            \"jid\": \"556596910295@s.whatsapp.net\",\n            \"msg\": \"PEA 2\"\n        },\n        {\n            \"type\": \"textMessage_v001\",\n            \"mark\": \"/NVhIcmRVns=\",\n            \"jid\": \"556596910295@s.whatsapp.net\",\n            \"msg\": \"PEA 1\"\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/secretcode/123412341234",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"secretcode",
+						"123412341234"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "queueStarting",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"type\": \"queue starting\",\n    \"queueSize\": 0\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/secretcode/123412341234",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"secretcode",
+						"123412341234"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "spreadStarting",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"type\": \"spread starting\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/secretcode/123412341234",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"secretcode",
+						"123412341234"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "connectionstate",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"type\": \"connectionstate\",\n    \"state\": \"open\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/secretcode/123412341234",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"secretcode",
+						"123412341234"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
