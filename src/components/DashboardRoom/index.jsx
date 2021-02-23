@@ -1,35 +1,16 @@
 import React from 'react'
 import { Container, MainContainer, MainContainerIcon, FirstText, SecondText } from './style'
 
-import { useQuery, gql, useSubscription } from '@apollo/client'
-
-const QUERY_HELLO = gql`
-    query HelloWorld {
-        hello
-    }
-`
-function GetHelloWorld() {
-    const { loading, error, data } = useQuery(QUERY_HELLO)
-
-    if (loading) return <p>Loading...</p>
-    if (error) return <p>Error</p>
-
-    return <p>{data.hello}</p>
-}
-
-const DATENOW_SUBSCRIPTION = gql`
-    subscription DateNow {
-        datenow
-    }
-`
-function GetDateNow() {
-    const { data, loading } = useSubscription( DATENOW_SUBSCRIPTION )
-
-    console.log(data)
-    return <h4>New DateNow(): {!loading && data.datenow}</h4>
-}
+// Apollo (Temp)
+import { useMutation } from '@apollo/client'
+// Temp
+import { GetHelloWorld } from '../../store/Apollo/HelloWorld'
+import { GetDateNow } from '../../store/Apollo/DateNow'
+import { ShowButtonToSend, SEND_MESSAGE_MUTATION } from '../../store/Apollo/SendMessage'
 
 const DashboardRoom = ({}) => {
+    const [SendMessageMutation, { data: returnData }] = useMutation(SEND_MESSAGE_MUTATION)
+
     return (
         <Container data-testid="DashboardContainer">
             <MainContainer>
@@ -39,7 +20,9 @@ const DashboardRoom = ({}) => {
                 
                 {/* {GetHelloWorld()} */}
 
-                {GetDateNow()}
+                {/* {GetDateNow()} */}
+
+                {ShowButtonToSend(SendMessageMutation, returnData)}
             </MainContainer>
         </Container>
     )
