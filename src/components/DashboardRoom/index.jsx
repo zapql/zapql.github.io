@@ -8,7 +8,6 @@ const QUERY_HELLO = gql`
         hello
     }
 `
-
 function GetHelloWorld() {
     const { loading, error, data } = useQuery(QUERY_HELLO)
 
@@ -16,6 +15,18 @@ function GetHelloWorld() {
     if (error) return <p>Error</p>
 
     return <p>{data.hello}</p>
+}
+
+const DATENOW_SUBSCRIPTION = gql`
+    subscription DateNow {
+        datenow
+    }
+`
+function GetDateNow() {
+    const { data, loading } = useSubscription( DATENOW_SUBSCRIPTION )
+
+    console.log(data)
+    return <h4>New DateNow(): {!loading && data.datenow}</h4>
 }
 
 const DashboardRoom = ({}) => {
@@ -26,7 +37,9 @@ const DashboardRoom = ({}) => {
                 <FirstText>Keep your phone connected</FirstText>
                 <SecondText>WhatsApp connects to your phone to sync messages. To reduce data usage, connect your phone to Wi-Fi.</SecondText> */}
                 
-                {GetHelloWorld()}
+                {/* {GetHelloWorld()} */}
+
+                {GetDateNow()}
             </MainContainer>
         </Container>
     )
