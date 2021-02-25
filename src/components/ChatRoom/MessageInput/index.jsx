@@ -2,35 +2,37 @@ import React, { useState } from 'react'
 import SendIcon from './SendMessageButton'
 import { Container, ActualInput, SendButton } from './style'
 
-const MessageInput = ( { messageInputOnClick, dispatch, chatId } ) => {
-    // Componente cuida apenas de seu proprio estado temporario.
-    const [MessageInputLocalState, setInputMessage] = useState('');
+const MessageInput = ( { onMessage, chatId, inputState, setInputState } ) => {
+    
+    const sendInput = () => {
+        return inputState ? onMessage({variables: {to: chatId, msg: inputState}}) : false
+    }
 
     const onKeyPress = (e) => {
         if (e.charCode === 13) {
-          return messageInputOnClick( MessageInputLocalState, dispatch, setInputMessage, chatId )
+          return sendInput()
         }
       };
 
     const onChange = ({ target }) => {
-        setInputMessage(target.value);
+        setInputState(target.value);
     };
 
     return (
         <Container>
             <ActualInput
                 data-testid="message-input"
+                id="message-input"
                 type="text"
                 placeholder="Type a message"
-                value={MessageInputLocalState}
+                value={inputState}
                 onKeyPress={onKeyPress}
                 onChange={onChange}
             />
             <SendButton
                 data-testid="send-button"
-                // variant="contained"
-                // color="primary"
-                onClick={() => messageInputOnClick( MessageInputLocalState, dispatch, setInputMessage, chatId )}>
+                id="send-button"
+                onClick={() => sendInput()}>
                 <SendIcon />
             </SendButton>
         </Container>
