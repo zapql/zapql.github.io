@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import {
     Redirect
 } from 'react-router-dom'
@@ -7,45 +7,65 @@ import MessageList from './MessageList';
 import MessageInput from './MessageInput';
 import { Container } from './style'
 
-function messageInputOnClick( MessageInputLocalState, dispatch, setInputMessage, chatId ) {
-    if (!MessageInputLocalState) return;
+import { useMutation } from '@apollo/client'
+import { SEND_TEXT_MESSAGE_MUTATION } from '../../store/Apollo/ChatRoom'
 
-    setInputMessage(() => '')
-    
-    dispatch((previousState) => {
-        return ( 
-            {...previousState, 
-                chats: {
-                    ...previousState.chats,
-                    [chatId]:
-                        [
-                            ...previousState.chats[chatId],
-                            {
-                                wid: Math.random(),
-                                isMine: true,
-                                msg: MessageInputLocalState,
-                                timestamp: Math.floor(Date.now() / 1000)
-                            }
-                        ]
-                    
-                }}
-        )
-    })
+const disableMessageInput = (bool) => {
+    document.getElementById("message-input").disabled = bool
+    document.getElementById("send-button").disabled = bool
 }
 
 const ChatRoom = ({ chatRoomData = {id:"", info: {}, messages: []}, dispatch }) => {
 
-    // USEEFFECT?
-    // useEffect(() => {
-    //     // Quando chatId muda, altera o estado
-    //     sendMessage(chatData!.messages)
-    // }, [chatId])
+    const [ inputState, setInputState ] = useState('');
+
+    const [ sendMessageMutation, { loading, error, data: returnData } ] = useMutation(SEND_TEXT_MESSAGE_MUTATION)
+
+    // useEffect para useMutation
+    useEffect(() => {
+        let chatId = chatRoomData.id
+
+        if (loading) {
+            disableMessageInput(true)
+        }
+        if (error) {
+            disableMessageInput(false)
+            console.log("error")
+        }
+        if (returnData) {
+            disableMessageInput(false)
+            console.log("RETURN DATA: ", returnData)
+
+            // TODO: depois vai ter outros tipos de mensagem
+            let typeKey = Object.keys(returnData)[0]
+            
+            if (returnData[typeKey] === null) {
+                // TODO: tratar erro
+                console.log("VOLTOU NULO, ERRO!")
+                return false
+            }
+
+            setInputState(() => '')
+
+            dispatch((previousState) => {
+                return ( 
+                    {...previousState, 
+                        chats: {
+                            ...previousState.chats,
+                            [chatId]:
+                                [
+                                    ...previousState.chats[chatId],
+                                    {
+                                        ...returnData[typeKey]
+                                    }
+                                ]
+                            
+                        }}
+                )
+            })
+        }
+    }, [loading, error, returnData])
     
-    /**
-     * Se chatId for incorreta, e.g. /chats/1
-     * Então chatRoomData virá vazio, redireciona para /chats/
-     * Se chatId for válido, exibe ChatRoom
-     */
     return (
         <React.Fragment>
             {
@@ -53,8 +73,8 @@ const ChatRoom = ({ chatRoomData = {id:"", info: {}, messages: []}, dispatch }) 
                 ? 
                 <Container data-testid="CallServiceContainer">
                     <ChatRoomHeader chatHeaderData={chatRoomData.info} />
-                    <MessageList messageListData={chatRoomData.messages} />
-                    <MessageInput messageInputOnClick={messageInputOnClick} dispatch={dispatch} chatId={chatRoomData.id} />
+                    <MessageList messageListData={chatRoomData.messages} chatId={chatRoomData.id} />
+                    <MessageInput onMessage={sendMessageMutation} chatId={chatRoomData.id} inputState={inputState} setInputState={setInputState} />
                 </Container>
                 :
                 <Redirect to="/chats" />
