@@ -4,9 +4,9 @@ import { Container, MainContainer, MainContainerIcon, FirstText, SecondText } fr
 // Apollo (Temp)
 import { useMutation } from '@apollo/client'
 // Temp
-import { GetHelloWorld } from '../../store/Apollo/HelloWorld'
-import { GetDateNow } from '../../store/Apollo/DateNow'
-import { ShowButtonToSend, SEND_MESSAGE_MUTATION } from '../../store/Apollo/SendMessage'
+import { GetHelloWorld } from '../../store/Apollo/TestesIniciais/HelloWorld'
+import { GetDateNow } from '../../store/Apollo/TestesIniciais/DateNow'
+import { ShowButtonToSend, SEND_MESSAGE_MUTATION } from '../../store/Apollo/TestesIniciais/SendMessage'
 
 const DashboardRoom = ({}) => {
     const [SendMessageMutation, { data: returnData }] = useMutation(SEND_MESSAGE_MUTATION)
