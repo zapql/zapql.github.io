@@ -9,7 +9,7 @@ const MessageInput = ( { onMessage, chatId, inputState, setInputState } ) => {
     }, [chatId])
     
     const sendInput = () => {
-        return inputState ? onMessage({variables: {to: chatId, msg: inputState}}) : false
+        return inputState[chatId] ? onMessage({variables: {to: chatId, msg: inputState[chatId]}}) : false
     }
 
     const onKeyPress = (e) => {

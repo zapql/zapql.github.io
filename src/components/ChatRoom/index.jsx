@@ -89,7 +89,10 @@ const ChatRoom = ({ chatRoomData = {id:"", info: {}, messages: []}, dispatch }) 
             let typeKey = Object.keys(returnData)[0]
 
             disableMessageInput(false)
-            setInputState(() => '')
+            setInputState({
+                ...inputState,
+                [chatRoomData.id]: ''
+            })
 
             dispatch((previousState) => {
                 return ( 
