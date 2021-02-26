@@ -95,6 +95,7 @@ const ChatRoom = ({ chatRoomData = {id:"", info: {}, messages: []}, dispatch }) 
                 ...inputState,
                 [chatRoomData.id]: ''
             })
+            document.getElementById('message-input').focus()
 
             dispatch((previousState) => {
                 return ( 
