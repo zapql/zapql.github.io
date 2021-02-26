@@ -18,7 +18,7 @@ const MessageList = ({ messageListData = [], chatId }) => {
     return (
         <Container id="message-list-container">
             {messageListData.map((message) => (
-                <MessageItem isMine={message.from != chatId ? true : false} data-testid="message-item" key={message.wid}>
+                <MessageItem isMine={message.from !== chatId ? true : false} data-testid="message-item" key={message.wid}>
                     <Contents isError={message.isError ? true : false} data-testid="message-content">{message.msg}</Contents>
                     <Timestamp data-testid="message-date">
                         {moment.unix(message.timestamp).format('HH:mm')}

@@ -61,11 +61,13 @@ const ChatRoom = ({ chatRoomData = {id:"", info: {}, messages: []}, dispatch }) 
     const [ inputState, setInputState ] = useState({});
 
     useEffect(() => {
-        if (!inputState.hasOwnProperty(chatRoomData.id)) setInputState({
-            ...inputState,
-            [chatRoomData.id]: ''
+        if (!inputState.hasOwnProperty(chatRoomData.id)) setInputState((inputState) => {
+            return {
+                ...inputState,
+                [chatRoomData.id]: ''
+            }
         })
-    }, [chatRoomData.id])
+    }, [inputState, chatRoomData.id])
 
     /**
      * Esse { onError: () => {} } é hack para lidar com uma inconsistência no Apollo.

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import SendIcon from './SendMessageButton'
+import React, { useEffect } from 'react'
+import SendIcon from './SendIcon'
 import { Container, ActualInput, SendButton } from './style'
 
 const MessageInput = ( { onMessage, chatId, inputState, setInputState } ) => {
