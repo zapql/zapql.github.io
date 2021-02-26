@@ -3,8 +3,13 @@ import styled, { css } from 'styled-components';
 export const Container = styled.div`
   display: block;
   flex: 2;
-  overflow-y: overlay;
+  overflow-x: hidden;
+  overflow-y: auto;
   padding: 0 14vh;
+
+  scrollbar-color: rgba(0,0,0,.2) hsla(0,0%,100%,.1);
+  scrollbar-width: thin;
+}
 `;
 
 export const MessageItem = styled.div`
@@ -65,6 +70,14 @@ export const Contents = styled.div`
     content: ' \\00a0\\00a0\\00a0\\00a0\\00a0\\00a0\\00a0\\00a0\\00a0\\00a0\\00a0\\00a0\\00a0\\00a0\\00a0\\00a0\\00a0\\00a0\\00a0';
     display: inline;
   }
+
+  ${(props) =>
+    props.isError
+    ? css`
+        font-style: italic;
+        color: gray;    
+    `
+    : css``}
 `;
 
 export const Timestamp = styled.div`

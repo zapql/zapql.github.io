@@ -15,6 +15,42 @@ const disableMessageInput = (bool) => {
     document.getElementById("send-button").disabled = bool
 }
 
+const handleError = (error, dispatch, chatId) => {
+    disableMessageInput(false)
+
+    console.log("Send Message Error: ", error)
+
+    if (error.type === null) {
+        // TODO: Generate Log
+    }
+    if (error.networkError) {
+        // TODO: Generate Log
+    }
+    if (error.graphQLErrors) {
+        // TODO: Generate Log
+    }
+
+    dispatch((previousState) => {
+        return ( 
+            {...previousState, 
+                chats: {
+                    ...previousState.chats,
+                    [chatId]:
+                        [
+                            ...previousState.chats[chatId],
+                            {
+                                wid: `error-${Math.random()}`,
+                                msg: "Sua mensagem não pôde ser enviada.",
+                                isError: true,
+                                timestamp: (Date.now() / 1000)
+                            }
+                        ]
+                    
+                }}
+        )
+    })
+}
+
 const ChatRoom = ({ chatRoomData = {id:"", info: {}, messages: []}, dispatch }) => {
 
     const [ inputState, setInputState ] = useState('');
@@ -29,21 +65,14 @@ const ChatRoom = ({ chatRoomData = {id:"", info: {}, messages: []}, dispatch }) 
             disableMessageInput(true)
         }
         if (error) {
-            disableMessageInput(false)
-            console.log("error")
+            return handleError(error, dispatch, chatRoomData.id)
         }
         if (returnData) {
+            if (returnData[0] === null) return handleError({type: null}, dispatch, chatRoomData.id)
+            
             disableMessageInput(false)
-            console.log("RETURN DATA: ", returnData)
-
             // TODO: depois vai ter outros tipos de mensagem
             let typeKey = Object.keys(returnData)[0]
-            
-            if (returnData[typeKey] === null) {
-                // TODO: tratar erro
-                console.log("VOLTOU NULO, ERRO!")
-                return false
-            }
 
             setInputState(() => '')
 

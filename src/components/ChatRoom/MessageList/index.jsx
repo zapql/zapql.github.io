@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import moment from 'moment';
 import { Container, MessageItem, Contents, Timestamp } from './style'
 
@@ -10,14 +10,19 @@ import { Container, MessageItem, Contents, Timestamp } from './style'
  */
 const MessageList = ({ messageListData = [], chatId }) => {
 
+    useEffect(() => {
+        // Pin scroll to bottom
+        document.getElementById('message-list-container').scrollTop = document.getElementById('message-list-container').scrollHeight
+    })
+
     return (
-        <Container>
+        <Container id="message-list-container">
             {messageListData.map((message) => (
                 <MessageItem isMine={message.from != chatId ? true : false} data-testid="message-item" key={message.wid}>
-                <Contents data-testid="message-content">{message.msg}</Contents>
-                <Timestamp data-testid="message-date">
-                    {moment.unix(message.timestamp).format('HH:mm')}
-                </Timestamp>
+                    <Contents isError={message.isError ? true : false} data-testid="message-content">{message.msg}</Contents>
+                    <Timestamp data-testid="message-date">
+                        {moment.unix(message.timestamp).format('HH:mm')}
+                    </Timestamp>
                 </MessageItem>
             ))}
         </Container>
