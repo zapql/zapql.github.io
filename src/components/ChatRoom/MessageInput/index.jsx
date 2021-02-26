@@ -1,8 +1,12 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import SendIcon from './SendMessageButton'
 import { Container, ActualInput, SendButton } from './style'
 
 const MessageInput = ( { onMessage, chatId, inputState, setInputState } ) => {
+
+    useEffect(() => {
+        document.getElementById('message-input').focus()
+    }, [chatId])
     
     const sendInput = () => {
         return inputState ? onMessage({variables: {to: chatId, msg: inputState}}) : false
