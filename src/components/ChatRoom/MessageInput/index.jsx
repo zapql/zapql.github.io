@@ -19,7 +19,10 @@ const MessageInput = ( { onMessage, chatId, inputState, setInputState } ) => {
       };
 
     const onChange = ({ target }) => {
-        setInputState(target.value);
+        setInputState({
+            ...inputState,
+            [chatId]: target.value
+        });
     };
 
     return (
@@ -29,7 +32,7 @@ const MessageInput = ( { onMessage, chatId, inputState, setInputState } ) => {
                 id="message-input"
                 type="text"
                 placeholder="Type a message"
-                value={inputState}
+                value={inputState[chatId] || ''}
                 onKeyPress={onKeyPress}
                 onChange={onChange}
             />
