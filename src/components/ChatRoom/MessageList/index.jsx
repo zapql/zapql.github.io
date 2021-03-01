@@ -21,8 +21,8 @@ const MessageList = ({ messageListData = [], chatId }) => {
             {messageListData.map((message) => (
                 message.isError
                 ?
-                    <Tooltip title={message.errorType} placement="left">
-                        <MessageItem isMine={message.from !== chatId ? true : false} data-testid="message-item" key={message.wid}>
+                    <Tooltip title={message.errorType} placement="left" key={message.wid}>
+                        <MessageItem isMine={message.from !== chatId ? true : false} data-testid="message-item">
                             <Contents isError={message.isError ? true : false} data-testid="message-content">{message.msg}</Contents>
                             <Timestamp data-testid="message-date">
                                 {moment.unix(message.timestamp).format('HH:mm')}

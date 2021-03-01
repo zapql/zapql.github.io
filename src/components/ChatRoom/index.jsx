@@ -18,21 +18,21 @@ const disableMessageInput = (bool) => {
 const handleError = (error, dispatch, chatId) => {
     disableMessageInput(false)
 
-    const ReturnNullException = (message, e) => {
+    function ReturnNullException (message, e) {
         this.message = message
         this.name = 'ReturnNullException'
         this.tooltip = 'Return Null Error'
         this.error = e
     }
 
-    const NetworkErrorException = (message, e) => {
+    function NetworkErrorException (message, e) {
         this.message = message
         this.name = 'NetworkErrorException'
         this.tooltip = 'Network Error'
         this.error = e
     }
 
-    const GraphQLErrorException = (message, e) => {
+    function GraphQLErrorException (message, e) {
         this.message = message
         this.name = 'GraphQLErrorException'
         this.tooltip = 'GraphQL Error'
@@ -138,7 +138,7 @@ const ChatRoom = ({ chatRoomData = {id:"", info: {}, messages: []}, dispatch }) 
             })
         }
     }, [mutationLoading, mutationError, mutationReturnData])
-    
+
     return (
         <React.Fragment>
             {
