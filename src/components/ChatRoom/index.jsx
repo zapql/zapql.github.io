@@ -18,22 +18,42 @@ const disableMessageInput = (bool) => {
 const handleError = (error, dispatch, chatId) => {
     disableMessageInput(false)
 
+    const ReturnNullException = (message, e) => {
+        this.message = message
+        this.name = 'ReturnNullException'
+        this.tooltip = 'Return Null Error'
+        this.error = e
+    }
+
+    const NetworkErrorException = (message, e) => {
+        this.message = message
+        this.name = 'NetworkErrorException'
+        this.tooltip = 'Network Error'
+        this.error = e
+    }
+
+    const GraphQLErrorException = (message, e) => {
+        this.message = message
+        this.name = 'GraphQLErrorException'
+        this.tooltip = 'GraphQL Error'
+        this.error = e
+    }
+
     try {
         if (error.type === null) {
-            throw new Error("Retorno nulo de mutation.")
+            throw new ReturnNullException("Retorno nulo de mutation.", error)
         }
         if (error.networkError) {
-            throw new Error("Network Error: the entire query was rejected.")
+            throw new NetworkErrorException("Network Error: the entire query was rejected.", error)
         }
         if (error.graphQLErrors) {
-            throw new Error("GrapgQL Error: failed resolvers on parse, validation or execution phase.")
+            throw new GraphQLErrorException("GraphQL Error: failed resolvers on parse, validation or execution phase.", error)
         }
         throw new Error("Unknow Error")
-    } catch (throwedError) {
-        console.error(throwedError)
-        console.table(error)
-        // TODO: log error com mutation em database de erros
-    } finally {
+    } catch (Exception) {
+        console.error(Exception.message)
+        console.table(Exception)
+
         dispatch((previousState) => {
             return ( 
                 {...previousState, 
@@ -46,6 +66,7 @@ const handleError = (error, dispatch, chatId) => {
                                     wid: `error-${Math.random()}`,
                                     msg: "Sua mensagem não pôde ser enviada.",
                                     isError: true,
+                                    errorType: Exception.tooltip,
                                     timestamp: (Date.now() / 1000)
                                 }
                             ]
@@ -53,6 +74,7 @@ const handleError = (error, dispatch, chatId) => {
                     }}
             )
         })
+        // TODO: log error com mutation em database de erros
     }
 }
 
@@ -75,20 +97,21 @@ const ChatRoom = ({ chatRoomData = {id:"", info: {}, messages: []}, dispatch }) 
      * por uma inconsistência (ou por design) sem o onError por enquanto a página quebra e o aplicativo morre.
      * Ver issue: https://github.com/apollographql/apollo-client/issues/6070
      */
-    const [ sendMessageMutation, { loading, error, data: returnData } ] = useMutation(SEND_TEXT_MESSAGE_MUTATION, { onError: () => {} })
+    const [ sendMessageMutation, { loading: mutationLoading, error: mutationError, data: mutationReturnData } ] = useMutation(SEND_TEXT_MESSAGE_MUTATION, { onError: () => {} })
 
     useEffect(() => {
-        if (loading) {
+        if (mutationLoading) {
             disableMessageInput(true)
         }
-        if (error) {
-            return handleError(error, dispatch, chatRoomData.id)
+        if (mutationError) {
+            return handleError(mutationError, dispatch, chatRoomData.id)
         }
-        if (returnData) {
-            if (returnData[0] === null) return handleError({type: null}, dispatch, chatRoomData.id)
-
+        if (mutationReturnData) {
             // TODO: depois vai ter outros tipos de mensagem
-            let typeKey = Object.keys(returnData)[0]
+            let typeKey = Object.keys(mutationReturnData)[0]
+
+            if (mutationReturnData[0] === null) return handleError({type: null}, dispatch, chatRoomData.id)
+            if (mutationReturnData[typeKey] === null) return handleError({type: typeKey, return: null}, dispatch, chatRoomData.id)
 
             disableMessageInput(false)
             setInputState({
@@ -106,7 +129,7 @@ const ChatRoom = ({ chatRoomData = {id:"", info: {}, messages: []}, dispatch }) 
                                 [
                                     ...previousState.chats[chatRoomData.id],
                                     {
-                                        ...returnData[typeKey]
+                                        ...mutationReturnData[typeKey]
                                     }
                                 ]
                             
@@ -114,7 +137,7 @@ const ChatRoom = ({ chatRoomData = {id:"", info: {}, messages: []}, dispatch }) 
                 )
             })
         }
-    }, [loading, error, returnData])
+    }, [mutationLoading, mutationError, mutationReturnData])
     
     return (
         <React.Fragment>

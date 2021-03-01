@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import moment from 'moment';
 import { Container, MessageItem, Contents, Timestamp } from './style'
+import Tooltip from '@material-ui/core/Tooltip'
 
 /**
  * isMine={message.from != chatId ? true : false} 
@@ -18,12 +19,23 @@ const MessageList = ({ messageListData = [], chatId }) => {
     return (
         <Container id="message-list-container">
             {messageListData.map((message) => (
-                <MessageItem isMine={message.from !== chatId ? true : false} data-testid="message-item" key={message.wid}>
-                    <Contents isError={message.isError ? true : false} data-testid="message-content">{message.msg}</Contents>
-                    <Timestamp data-testid="message-date">
-                        {moment.unix(message.timestamp).format('HH:mm')}
-                    </Timestamp>
-                </MessageItem>
+                message.isError
+                ?
+                    <Tooltip title={message.errorType} placement="left">
+                        <MessageItem isMine={message.from !== chatId ? true : false} data-testid="message-item" key={message.wid}>
+                            <Contents isError={message.isError ? true : false} data-testid="message-content">{message.msg}</Contents>
+                            <Timestamp data-testid="message-date">
+                                {moment.unix(message.timestamp).format('HH:mm')}
+                            </Timestamp>
+                        </MessageItem>
+                    </Tooltip>
+                :
+                    <MessageItem isMine={message.from !== chatId ? true : false} data-testid="message-item" key={message.wid}>
+                        <Contents isError={message.isError ? true : false} data-testid="message-content">{message.msg}</Contents>
+                        <Timestamp data-testid="message-date">
+                            {moment.unix(message.timestamp).format('HH:mm')}
+                        </Timestamp>
+                    </MessageItem>
             ))}
         </Container>
     )
