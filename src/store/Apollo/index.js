@@ -5,7 +5,7 @@ import { getMainDefinition } from '@apollo/client/utilities'
 import { setContext } from '@apollo/client/link/context';
 
 // Code:
-const AUTH_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzaGFyZCI6IjU1NjU5NjkxMDI5NSIsImlhdCI6MTYxNDA5NjI3Nn0.fNgOsRfM0y0-lQOZmhqn3NA7h3lR9EcOWyIiSqdTxBI"
+const AUTH_TOKEN = process.env.REACT_APP_AUTH
 
 /**
  * Permite recuperar o header e incluir autenticacao.

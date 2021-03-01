@@ -1,6 +1,6 @@
 {
   "name": "zapql",
-  "homepage": "https://github.com/zapql/zapql.github.io",
+  "homepage": "https://zapql.github.io",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
