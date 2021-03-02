@@ -27,8 +27,11 @@ const httpLink = new HttpLink({
 const wsLink = new WebSocketLink({
   uri: 'ws://zapql.com:4000/graphql',
   options: {
-    reconnect: true
-  }
+    reconnect: true,
+    connectionParams: {
+      authorization: AUTH_TOKEN ? `Bearer ${AUTH_TOKEN}` : "",
+    } 
+  },
 })
 
 /**
@@ -45,7 +48,7 @@ const splitLink = split(
     );
   },
   wsLink,
-  authLink.concat(httpLink), // so esta passando header aqui por enquanto
+  authLink.concat(httpLink),
 )
 
 export const client = new ApolloClient({
