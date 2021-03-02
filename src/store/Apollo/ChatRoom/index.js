@@ -15,3 +15,20 @@ export const SEND_TEXT_MESSAGE_MUTATION = gql`
         forwarded
     }
 }`
+
+export const ON_TEXT_MESSAGE_SUBSCRIPTION = gql`
+    subscription {
+        messages {
+            __typename
+            ... on TextMesage {
+                wid
+                timestamp
+                to
+                from
+                msg
+                quote
+                forwarded
+            }
+        }
+    }
+`

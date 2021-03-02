@@ -7,8 +7,8 @@ import MessageList from './MessageList';
 import MessageInput from './MessageInput';
 import { Container } from './style'
 
-import { useMutation } from '@apollo/client'
-import { SEND_TEXT_MESSAGE_MUTATION } from '../../store/Apollo/ChatRoom'
+import { useMutation, useSubscription } from '@apollo/client'
+import { SEND_TEXT_MESSAGE_MUTATION, ON_TEXT_MESSAGE_SUBSCRIPTION } from '../../store/Apollo/ChatRoom'
 
 const disableMessageInput = (bool) => {
     document.getElementById("message-input").disabled = bool
@@ -109,6 +109,7 @@ const ChatRoom = ({ chatRoomData = {id:"", info: {}, messages: []}, dispatch }) 
         if (mutationReturnData) {
             // TODO: depois vai ter outros tipos de mensagem
             let typeKey = Object.keys(mutationReturnData)[0]
+            let chatId = mutationReturnData[typeKey].to
 
             if (mutationReturnData[0] === null) return handleError({type: null}, dispatch, chatRoomData.id)
             if (mutationReturnData[typeKey] === null) return handleError({type: typeKey, return: null}, dispatch, chatRoomData.id)
@@ -116,18 +117,18 @@ const ChatRoom = ({ chatRoomData = {id:"", info: {}, messages: []}, dispatch }) 
             disableMessageInput(false)
             setInputState({
                 ...inputState,
-                [chatRoomData.id]: ''
+                [chatId]: ''
             })
             document.getElementById('message-input').focus()
 
-            dispatch((previousState) => {
+            return dispatch((previousState) => {
                 return ( 
                     {...previousState, 
                         chats: {
                             ...previousState.chats,
-                            [chatRoomData.id]:
+                            [chatId]:
                                 [
-                                    ...previousState.chats[chatRoomData.id],
+                                    ...previousState.chats[chatId],
                                     {
                                         ...mutationReturnData[typeKey]
                                     }
@@ -139,6 +140,36 @@ const ChatRoom = ({ chatRoomData = {id:"", info: {}, messages: []}, dispatch }) 
         }
     }, [mutationLoading, mutationError, mutationReturnData])
 
+    const { data: subscriptionData, loading: subscriptionLoading } = useSubscription( ON_TEXT_MESSAGE_SUBSCRIPTION )
+
+    useEffect(() => {
+        if (subscriptionLoading) {
+            console.log("Connection stablished with", chatRoomData.id)
+        }
+        if (subscriptionData) {
+            // TODO: depois vai ter outros tipos de mensagem
+            let typeKey = Object.keys(subscriptionData)[0]
+            let chatId = subscriptionData[typeKey].from
+
+            return dispatch((previousState) => {
+                return ( 
+                    {...previousState, 
+                        chats: {
+                            ...previousState.chats,
+                            [chatId]:
+                                [
+                                    ...previousState.chats[chatId],
+                                    {
+                                        ...subscriptionData[typeKey]
+                                    }
+                                ]
+                            
+                        }}
+                )
+            })
+        }
+    }, [subscriptionLoading, subscriptionData])
+        
     return (
         <React.Fragment>
             {
