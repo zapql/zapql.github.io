@@ -1,14 +1,25 @@
 import { useSubscription, gql } from '@apollo/client'
 
-const DATENOW_SUBSCRIPTION = gql`
-    subscription DateNow {
-        datenow
+const CLOCK_SUBSCRIPTION = gql`
+    subscription Clock {
+        clock
     }
 `
 
-export function GetDateNow() {
-    const { data, loading } = useSubscription( DATENOW_SUBSCRIPTION )
+export function GetClock() {
+    const { data, loading } = useSubscription( CLOCK_SUBSCRIPTION )
 
-    console.log(data)
-    return <h4>New DateNow(): {!loading && data.datenow}</h4>
+    return <h4>New DateNow(): {!loading && data.clock}</h4>
+}
+
+export const AUTHCLOCK_SUBSCRIPTION = gql`
+    subscription isAuthClock {
+        isAuthClock
+    }
+`
+
+export function GetAuthClock() {
+    const { data, loading } = useSubscription( AUTHCLOCK_SUBSCRIPTION )
+
+    return <h4>New DateNow(): {!loading && data.isAuthClock}</h4>
 }
