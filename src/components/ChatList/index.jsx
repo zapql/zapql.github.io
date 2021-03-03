@@ -1,19 +1,19 @@
 import React from 'react'
 import moment from 'moment'
 
-import List from '@material-ui/core/List';
+
 import ListItem from '@material-ui/core/ListItem'
 import Divider from '@material-ui/core/Divider';
-import { DivToolbar, ChatPicture, ChatInfo, ChatName, MessageContent, MessageDate, Container } from './style'
+import { DivToolbar, ChatPicture, ChatInfo, ChatName, MessageContent, MessageDate, ContactList, Container } from './style'
 import { Link } from 'react-router-dom';
 
 const ChatList = ({ chatListData = {contacts: {}, chats: {}} }) => {
-
+    
     return(
-        <Container data-testid="ChatDiv">
-                <DivToolbar />
-                <Divider />
-                <List>
+        <Container data-testid="Conteiner">
+            <DivToolbar />
+            <Divider />
+                {/* <List>
                     {chatListData.map((contact) => (
                     <ListItem
                         key={contact.id}
@@ -42,7 +42,37 @@ const ChatList = ({ chatListData = {contacts: {}, chats: {}} }) => {
                         </ChatInfo>
                     </ListItem>
                     ))}
-                </List>
+                </List> */}
+                <ContactList data-testid="ContactList">
+                    {chatListData.map((contact) => (
+                        <ListItem
+                            key={contact}
+                            data-testid="chat"
+                            button
+                            component={Link}
+                            to={`/chats/${contact}`}
+                            >
+                            <ChatPicture
+                            data-testid="picture"
+                            src=""
+                            alt="Profile"
+                            />
+                            <ChatInfo>
+                            <ChatName data-testid="name">{contact}</ChatName>
+                            
+                                <React.Fragment>
+                                <MessageContent data-testid="content">
+                                    ""
+                                </MessageContent>
+                                <MessageDate data-testid="date">
+                                    ""
+                                </MessageDate>
+                                </React.Fragment>
+                            
+                            </ChatInfo>
+                        </ListItem>
+                    ))}
+                </ContactList>
             </Container>
     )
 }
