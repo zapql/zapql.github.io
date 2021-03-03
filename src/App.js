@@ -13,6 +13,7 @@ import { client } from './store/Apollo'
 // Page
 import Dashboard from './pages/Dashboard'
 import LandingPage from './pages/LandingPage'
+import RegisterNewInstance from './pages/RegisterNewInstance'
 
 // Temp
 import datazero from './store/datazero'
@@ -31,6 +32,9 @@ const App = () => {
           </Route>
           <Route exact path="/" >
             <LandingPage />
+          </Route>
+          <Route path="/registration">
+            <RegisterNewInstance />
           </Route>
         </Switch>
       </BrowserRouter>
