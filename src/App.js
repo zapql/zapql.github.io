@@ -12,6 +12,7 @@ import { ApolloProvider } from '@apollo/client'
 import { client } from './store/Apollo'
 // Page
 import Dashboard from './pages/Dashboard'
+import LandingPage from './pages/LandingPage'
 
 // Temp
 import datazero from './store/datazero'
@@ -28,7 +29,9 @@ const App = () => {
           <Route path="/chats/:chatId?">
             <Dashboard state={state} dispatch={dispatch} />
           </Route>
-          <Route exact path="/" render={redirectToDashboard} />
+          <Route exact path="/" >
+            <LandingPage />
+          </Route>
         </Switch>
       </BrowserRouter>
     </ApolloProvider>
