@@ -3,13 +3,11 @@ import Toolbar from '@material-ui/core/Toolbar';
 
 import styled from "styled-components";
 
-// background-color nao aplica no storybook
 export const Navbar = styled(AppBar)`
-    background-color: var(--primary-bg);
-    color: var(--primary-text);
-    font-size: 20px;
-    line-height: 40px;
-    position: relative;
+  height: 10vh;
+  font-size: 20px;
+  line-height: 40px;
+  position: relative;
 `;
 
 export const Container = styled(Toolbar)`
