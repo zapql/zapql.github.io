@@ -14,6 +14,7 @@ import { client } from './store/Apollo'
 import Dashboard from './pages/Dashboard'
 import LandingPage from './pages/LandingPage'
 import RegisterNewInstance from './pages/RegisterNewInstance'
+import OpenConnection from './pages/OpenConnection'
 
 // Temp
 import datazero from './store/datazero'
@@ -21,20 +22,21 @@ import datazero from './store/datazero'
 const App = () => {
   const [state, dispatch] = useState(datazero)
   
-  const redirectToDashboard = () => <Redirect to="/chats" />
-  
   return (
     <ApolloProvider client={client}>
       <BrowserRouter>
         <Switch>
-          <Route path="/chats/:chatId?">
-            <Dashboard state={state} dispatch={dispatch} />
-          </Route>
           <Route exact path="/" >
             <LandingPage />
           </Route>
           <Route path="/registration">
             <RegisterNewInstance />
+          </Route>
+          <Route path="/open/:token?">
+            <OpenConnection />
+          </Route>
+          <Route path="/chats/:chatId?">
+            <Dashboard state={state} dispatch={dispatch} />
           </Route>
         </Switch>
       </BrowserRouter>
