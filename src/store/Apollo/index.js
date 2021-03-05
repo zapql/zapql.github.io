@@ -1,16 +1,19 @@
-import { ApolloClient, InMemoryCache } from '@apollo/client'
-import { split, HttpLink } from '@apollo/client'
-import { WebSocketLink } from '@apollo/client/link/ws'
+import { ApolloClient, ApolloLink, InMemoryCache, split, HttpLink } from '@apollo/client'
 import { getMainDefinition } from '@apollo/client/utilities'
+import { WebSocketLink } from '@apollo/client/link/ws'
 import { setContext } from '@apollo/client/link/context';
 
-// Code:
-const AUTH_TOKEN = process.env.REACT_APP_AUTH
+import localforage from 'localforage'
 
-/**
- * Permite recuperar o header e incluir autenticacao.
- * Deve ser concatenado com httpLink e ou wsLink.
- */
+// Code:
+let AUTH_TOKEN
+const contextLink = setContext(async () => {
+  if (!AUTH_TOKEN) {
+    AUTH_TOKEN = await localforage.getItem('token')
+  }
+  return { AUTH_TOKEN }
+});
+
 const authLink = setContext((_, { headers }) => {
   return {
     headers: {
@@ -28,17 +31,12 @@ const wsLink = new WebSocketLink({
   uri: 'wss://zapql.com/graphql',
   options: {
     reconnect: true,
-    connectionParams: {
+    connectionParams: () => ({
       authorization: AUTH_TOKEN ? `Bearer ${AUTH_TOKEN}` : "",
-    } 
+    }),
   },
 })
 
-/**
- * A funcao split faz com que o client diferencie o tipo de requisicao.
- * Se for query e mutation, usa o httpLink;
- * Se for subscription usa o wsLink.
- */
 const splitLink = split(
   ({ query }) => {
     const definition = getMainDefinition(query);
@@ -52,6 +50,9 @@ const splitLink = split(
 )
 
 export const client = new ApolloClient({
-  link: splitLink,
+  link: ApolloLink.from([
+    contextLink,
+    splitLink
+  ]),
   cache: new InMemoryCache()
 })
