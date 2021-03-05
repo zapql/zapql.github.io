@@ -21,11 +21,11 @@ const authLink = setContext((_, { headers }) => {
 });
 
 const httpLink = new HttpLink({
-  uri: 'http://zapql.com:4000'
+  uri: 'https://zapql.com/graphql'
 })
 
 const wsLink = new WebSocketLink({
-  uri: 'ws://zapql.com:4000/graphql',
+  uri: 'wss://zapql.com/graphql',
   options: {
     reconnect: true,
     connectionParams: {
