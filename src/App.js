@@ -3,7 +3,6 @@ import './App.css';
 // Router
 import {
   BrowserRouter,
-  Redirect,
   Route,
   Switch
 } from 'react-router-dom';
@@ -16,11 +15,8 @@ import LandingPage from './pages/LandingPage'
 import RegisterNewInstance from './pages/RegisterNewInstance'
 import OpenConnection from './pages/OpenConnection'
 
-// Temp
-import datazero from './store/datazero'
-
 const App = () => {
-  const [state, dispatch] = useState(datazero)
+  const [state, dispatch] = useState([])
   
   return (
     <ApolloProvider client={client}>
