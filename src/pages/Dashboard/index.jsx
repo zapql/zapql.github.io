@@ -42,7 +42,6 @@ const Dashboard = ({ state, dispatch }) => {
     let newContacts = {}
 
     chatListState.map((item, i) => {
-      console.log(item)
       Object.assign(newMessages, {[item]: {id: item, 
             info: [], 
             messages: []
