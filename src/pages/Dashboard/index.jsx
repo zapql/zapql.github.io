@@ -34,19 +34,30 @@ const Dashboard = ({ state, dispatch }) => {
   }, [queryLoading, queryError, queryData])
 
   const { chatId } = useParams()
-  
-  // Parse datazero
-  const contactList = Object.entries(state.contacts)
-  const messageList = Object.entries(state.chats)
 
-  let chatData = contactList.map((item, i) => Object.assign(
-    {}, 
-    {id: item[0]}, 
-    {info: item[1]}, 
-    {messages: messageList[i][1]}
-  ))
-  
-  let chatDataById = chatData.find((chat) => chat.id === chatId)
+  // TODO: recuperar de queries
+  // TODO: validar estrutura final
+  useEffect(() => {
+    let newMessages = {}
+    let newContacts = {}
+
+    chatListState.map((item, i) => {
+      console.log(item)
+      Object.assign(newMessages, {[item]: {id: item, 
+            info: [], 
+            messages: []
+          }})
+      Object.assign(newContacts, {[item]: []})
+    })
+
+    return dispatch((previousState) => {
+      return {
+        ...previousState,
+        chats: newMessages,
+        contacts: newContacts
+      }
+    })
+  }, [chatListState])
 
   return (
     <Row>
@@ -56,7 +67,7 @@ const Dashboard = ({ state, dispatch }) => {
       <Main data-testid="Main">
           {
             chatId
-            ? <ChatRoom chatRoomData={chatDataById} dispatch={dispatch} />
+            ? <ChatRoom chatRoomData={state.chats ? state.chats[chatId] : []} dispatch={dispatch} />
             : <DashboardRoom />
           }
       </Main>

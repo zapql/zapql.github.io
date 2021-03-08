@@ -62,18 +62,15 @@ const ChatRoom = ({ chatRoomData = {id:"", info: {}, messages: []}, dispatch }) 
             document.getElementById('message-input').focus()
 
             return dispatch((previousState) => {
+                // TODO: validar se estrutura sera final
                 return ( 
                     {...previousState, 
                         chats: {
                             ...previousState.chats,
-                            [chatId]:
-                                [
-                                    ...previousState.chats[chatId],
-                                    {
-                                        ...mutationReturnData[typeKey]
-                                    }
-                                ]
-                            
+                            [chatId]: {
+                                ...previousState.chats[chatId],
+                                messages: [...previousState.chats[chatId].messages, {...mutationReturnData[typeKey]}]
+                            }
                         }}
                 )
             })
@@ -93,18 +90,15 @@ const ChatRoom = ({ chatRoomData = {id:"", info: {}, messages: []}, dispatch }) 
 
             return dispatch((previousState) => {
                 return ( 
+                    // TODO: validar se estrutura sera final
                     {...previousState, 
-                        chats: {
-                            ...previousState.chats,
-                            [chatId]:
-                                [
-                                    ...previousState.chats[chatId],
-                                    {
-                                        ...subscriptionData[typeKey]
-                                    }
-                                ]
-                            
-                        }}
+                    chats: {
+                        ...previousState.chats,
+                        [chatId]: {
+                            ...previousState.chats[chatId],
+                            messages: [...previousState.chats[chatId].messages, {...subscriptionData[typeKey]}]
+                        }
+                    }}
                 )
             })
         }
