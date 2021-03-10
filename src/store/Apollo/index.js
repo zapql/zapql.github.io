@@ -9,7 +9,7 @@ import localforage from 'localforage'
 let AUTH_TOKEN
 const contextLink = setContext(async () => {
   if (!AUTH_TOKEN) {
-    AUTH_TOKEN = await localforage.getItem('token')
+    AUTH_TOKEN = await localforage.getItem('zapql-token')
   }
   return { AUTH_TOKEN }
 });

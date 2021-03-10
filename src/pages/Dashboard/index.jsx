@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { Redirect, useHistory, useParams } from 'react-router-dom';
 
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Grid from '@material-ui/core/Grid'
 import ChatList from '../../components/ChatList'
 import ChatRoom from '../../components/ChatRoom'
 import DashboardRoom from '../../components/DashboardRoom'
-import { Row, Side, Main } from './style'
+import { Row, Side, Main, Loading } from './style'
 
 import { useQuery } from '@apollo/client'
 import { ALL_CHATS_QUERY } from '../../store/Apollo/ChatList'
+
+import localForage from 'localforage'
 
 /**
  * TODO: useEffect com Promise.
@@ -15,6 +19,17 @@ import { ALL_CHATS_QUERY } from '../../store/Apollo/ChatList'
  * Senao, useHistory().push("/chats"), nao deve poder acessar numero invalido.
  */
 const Dashboard = ({ state, dispatch }) => {
+
+  let history = useHistory()
+
+  useEffect(() => {
+    localForage.getItem('zapql-token').then(function(result) {
+      if (result === null) return history.push("/registration")
+      else return dispatch((previousState) => {
+        return {...previousState, auth: true}
+      })
+    })
+  })
 
   const [ chatListState, setChatList ] = useState([])
   const { loading: queryLoading, error: queryError, data: queryData } = useQuery( ALL_CHATS_QUERY )
@@ -59,18 +74,27 @@ const Dashboard = ({ state, dispatch }) => {
   }, [chatListState])
 
   return (
-    <Row>
-      <Side id="Side" data-testid="Side">
-          <ChatList chatListData={chatListState} />
-      </Side>
-      <Main data-testid="Main">
-          {
-            chatId
-            ? <ChatRoom chatRoomData={state.chats ? state.chats[chatId] : []} dispatch={dispatch} />
-            : <DashboardRoom />
-          }
-      </Main>
-    </Row>
+    <React.Fragment>
+      {
+        state.auth
+        ?
+        <Row>
+          <Side id="Side" data-testid="Side">
+              <ChatList chatListData={chatListState} />
+          </Side>
+          <Main data-testid="Main">
+              {
+                chatId
+                ? <ChatRoom chatRoomData={state.chats ? state.chats[chatId] : []} dispatch={dispatch} />
+                : <DashboardRoom />
+              }
+          </Main>
+        </Row>
+        : <Loading container>
+          <CircularProgress />
+        </Loading>
+      }
+    </React.Fragment>
   )
 }
 

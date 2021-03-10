@@ -12,11 +12,11 @@ import { client } from './store/Apollo'
 // Page
 import Dashboard from './pages/Dashboard'
 import LandingPage from './pages/LandingPage'
-import RegisterNewInstance from './pages/RegisterNewInstance'
+import NewInstance from './pages/NewInstance'
 import OpenConnection from './pages/OpenConnection'
 
 const App = () => {
-  const [state, dispatch] = useState([])
+  const [state, dispatch] = useState({auth: false})
   
   return (
     <ApolloProvider client={client}>
@@ -26,7 +26,7 @@ const App = () => {
             <LandingPage />
           </Route>
           <Route path="/registration">
-            <RegisterNewInstance />
+            <NewInstance />
           </Route>
           <Route path="/open/:token?">
             <OpenConnection />
