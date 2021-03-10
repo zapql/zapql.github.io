@@ -26,6 +26,19 @@ export const ContactList = styled(List)`
   overflow-y: auto;
   scrollbar-color: rgba(0,0,0,.2) hsla(0,0%,100%,.1);
   scrollbar-width: thin;
+
+  ::-webkit-scrollbar {
+    width: 6px!important;
+    height: 6px!important;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: rgba(0,0,0,.2);
+  }
+
+  ::-webkit-scrollbar-track {
+    background: hsla(0,0%,100%,.1);
+  }
 `
 
 export const DivToolbar = styled.div`
