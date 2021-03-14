@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import List from '@material-ui/core/List';
 import Button from '@material-ui/core/Button'
 
 export const Container = styled.div`
@@ -36,7 +35,6 @@ export const PanelTOC = styled.div`
   ::-webkit-scrollbar-track {
     background: hsla(0,0%,100%,.1);
   }
-}
 `;
 
 export const IButton = styled(Button)`
