@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Redirect, useHistory, useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 
-import CircularProgress from '@material-ui/core/CircularProgress';
-import Grid from '@material-ui/core/Grid'
 import ChatList from '../../components/ChatList'
 import ChatRoom from '../../components/ChatRoom'
 import DashboardRoom from '../../components/DashboardRoom'
-import { Row, Side, Main, Loading } from './style'
+import { Row, Side, Main} from './style'
+import Loading from '../../components/Loading'
 
 import { useQuery } from '@apollo/client'
 import { ALL_CHATS_QUERY } from '../../store/Apollo/ChatList'
@@ -90,9 +89,7 @@ const Dashboard = ({ state, dispatch }) => {
               }
           </Main>
         </Row>
-        : <Loading container>
-          <CircularProgress />
-        </Loading>
+        : <Loading />
       }
     </React.Fragment>
   )
