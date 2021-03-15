@@ -1,17 +1,19 @@
 import React from 'react'
 import moment from 'moment'
 
-
+import SearchBar from './SearchBar'
 import ListItem from '@material-ui/core/ListItem'
 import Divider from '@material-ui/core/Divider';
 import { DivToolbar, ChatPicture, ChatInfo, ChatName, MessageContent, MessageDate, ContactList, Container } from './style'
 import { Link } from 'react-router-dom';
 
+// TODO: Recuperar estrutura final de chat
 const ChatList = ({ chatListData = {contacts: {}, chats: {}} }) => {
     
     return(
         <Container data-testid="Conteiner">
             <DivToolbar />
+            <SearchBar />
             <Divider />
                 {/* <List>
                     {chatListData.map((contact) => (
