@@ -6,6 +6,8 @@ import InstanceRegistration from '../../components/NewInstance/InstanceRegistrat
 import InstanceReadCode from '../../components/NewInstance/InstanceReadCode'
 import {Container, Form} from './style'
 
+import AlertMessage from '../../components/AlertMessage'
+
 import localForage from 'localforage'
 
 import { useMutation } from '@apollo/client'
@@ -21,18 +23,26 @@ const NewInstance = () => {
 
     let history = useHistory()
 
+    const [errorState, setErrorState] = useState({open: false, severity: "error", message: ""})
+
     const [registrationState, setRegistrationState] = useState({status: STATUS.LIST, qrCode: false})
 
     const [sendSignUpMutation, { loading: signupLoading, error: signupError, data: signupData }] = useMutation(SIGN_UP_CONNECTION, { onError: () => {} })
     const [sendQrCodeMutation, { loading: qrCodeLoading, error: qrCodeError, data: qrCodeData }] = useMutation(LAST_QR_CODE, { onError: () => {} })
 
-    // TODO: testar
     useEffect(() => {
         if (signupLoading) {
             console.log("Loading Signup...")
         }
         if (signupError) {
             console.log("Signup Error...")
+            setErrorState(() => {
+                return {
+                    open: true,
+                    severity: "error",
+                    message: "Signup Error, aguarde e tente novamente..."
+                }
+            })
         }
         if (signupData) {
             setRegistrationState((previousState) => {
@@ -41,21 +51,32 @@ const NewInstance = () => {
             sendQrCodeMutation({variables: {qr: signupData.signupconnection.qr}})
         }
     }, [signupLoading, signupError, signupData])
-
-    //onMessage({variables: {to: chatId, msg: inputState[chatId]}})
     
-    // TODO: testar
     useEffect(() => {
         if (qrCodeLoading) {
             console.log("Loading QR Code...")
         }
         if (qrCodeError) {
             console.log("QR Code Error...")
+            setErrorState(() => {
+                return {
+                    open: true,
+                    severity: "error",
+                    message: "QR Code Error, aguarde e tente novamente..."
+                }
+            })
         }
         if (qrCodeData) {
             if (qrCodeData.lastqrcode === null) {
-                // TIMEOUT, REDIRECIONA PARA GERAR NOVO QRCODE
+                // TIMEOUT, REQUISICAO PARA GERAR NOVO QRCODE
                 console.log("Gerando outro QR Code...")
+                setErrorState(() => {
+                    return {
+                        open: true,
+                        severity: "warning",
+                        message: "Tempo esgotado, gerando outro QR Code..."
+                    }
+                })
                 return sendSignUpMutation()
             }
             else {
@@ -76,6 +97,7 @@ const NewInstance = () => {
 
     return (
         <Container container>
+            <AlertMessage state={errorState} dispatch={setErrorState} />
             <Form>
                 {registrationState.status === STATUS.LIST 
                 ? <InstanceList dispatch={setRegistrationState} STATUS={STATUS} />
