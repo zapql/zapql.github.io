@@ -49,21 +49,19 @@ export const handleError = (error, dispatch, chatId, callback = () => {}) => {
         dispatch((previousState) => {
             return ( 
                 {...previousState, 
-                    chats: {
-                        ...previousState.chats,
-                        [chatId]:
-                            [
-                                ...previousState.chats[chatId],
-                                {
-                                    wid: `error-${Math.random()}`,
-                                    msg: "Sua mensagem não pôde ser enviada.",
-                                    isError: true,
-                                    errorType: Exception.tooltip,
-                                    timestamp: (Date.now() / 1000)
-                                }
-                            ]
-                        
-                    }}
+                chats: {
+                    ...previousState.chats,
+                    [chatId]: {
+                        ...previousState.chats[chatId],
+                        messages: [...previousState.chats[chatId].messages, {
+                            wid: `error-${Math.random()}`,
+                            msg: "Sua mensagem não pôde ser enviada.",
+                            isError: true,
+                            errorType: Exception.tooltip,
+                            timestamp: (Date.now() / 1000)
+                        }]
+                    }                    
+                }}
             )
         })
         // TODO: log error com mutation em database de erros
