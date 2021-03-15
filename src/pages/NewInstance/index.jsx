@@ -29,19 +29,16 @@ const NewInstance = () => {
     // TODO: testar
     useEffect(() => {
         if (signupLoading) {
-            console.log("loading signup")
+            console.log("Loading Signup...")
         }
         if (signupError) {
-            console.log("signup error")
+            console.log("Signup Error...")
         }
         if (signupData) {
-            console.log("data:")
-            console.table(signupData)
-
-            // setRegistrationState((previousState) => {
-            //     return {...previousState, qrCode: signupData.qr}
-            // })
-            // sendQrCodeMutation({variables: {qr: signupData.qr}})
+            setRegistrationState((previousState) => {
+                return {...previousState, qrCode: signupData.signupconnection.qr}
+            })
+            sendQrCodeMutation({variables: {qr: signupData.signupconnection.qr}})
         }
     }, [signupLoading, signupError, signupData])
 
@@ -50,27 +47,33 @@ const NewInstance = () => {
     // TODO: testar
     useEffect(() => {
         if (qrCodeLoading) {
-            console.log("loading qrCode")
+            console.log("Loading QR Code...")
         }
         if (qrCodeError) {
-            console.log("qrcode error")
+            console.log("QR Code Error...")
         }
         if (qrCodeData) {
-            localForage.setItem("instances", {
-                [qrCodeData.userinfo.number]: {
-                    avatar: qrCodeData.userinfo.avatar,
-                    name: qrCodeData.userinfo.name,
-                    number: qrCodeData.userinfo.number,
-                    jwt: qrCodeData.jwt
-                }
-            })
-            .then(() => {
-                history.push(`/open/${qrCodeData.jwt}`)
-            })
+            if (qrCodeData.lastqrcode === null) {
+                // TIMEOUT, REDIRECIONA PARA GERAR NOVO QRCODE
+                console.log("Gerando outro QR Code...")
+                return sendSignUpMutation()
+            }
+            else {
+                localForage.setItem("instances", {
+                    [qrCodeData.lastqrcode.userinfo.number]: {
+                        avatar: qrCodeData.lastqrcode.userinfo.avatar,
+                        name: qrCodeData.lastqrcode.userinfo.name,
+                        number: qrCodeData.lastqrcode.userinfo.number,
+                        jwt: qrCodeData.lastqrcode.jwt
+                    }
+                })
+                .then(() => {
+                    history.push(`/open/${qrCodeData.lastqrcode.jwt}`)
+                })
+            }
         }
     }, [qrCodeLoading, qrCodeError, qrCodeData])
 
-    console.log(registrationState)
     return (
         <Container container>
             <Form>

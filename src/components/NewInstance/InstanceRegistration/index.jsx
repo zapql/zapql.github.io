@@ -6,8 +6,7 @@ import TOC from './toc-example'
 const InstanceRegistration = ({sendSignUpMutation, dispatch, STATUS}) => {
 
     const generateQRCode = () => {
-        // TODO: TESTAR
-        // sendSignUpMutation()
+        sendSignUpMutation()
         
         dispatch((previousState) => {
             return {...previousState, status: STATUS.READ}

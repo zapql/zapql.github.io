@@ -17,5 +17,5 @@ export const PanelQRCode = styled.div`
   overflow-y: none;
 
   margin: 5vh;
-  max-height: 50vh;
+  max-height: 100vh;
 `;

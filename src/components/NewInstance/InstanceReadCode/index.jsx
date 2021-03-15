@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import {Container, PanelQRCode} from './style'
 import QRCode from 'qrcode.react'
 

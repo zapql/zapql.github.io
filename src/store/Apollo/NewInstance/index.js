@@ -9,8 +9,8 @@ export const SIGN_UP_CONNECTION = gql`
 `
 
 export const LAST_QR_CODE = gql`
-mutation LastQRCode {
-    lastqrcode (input: {qr: String}) {
+mutation LastQRCode($qr: String!) {
+    lastqrcode (input: {qr: $qr}) {
         jwt, 
         userinfo {
             avatar,
