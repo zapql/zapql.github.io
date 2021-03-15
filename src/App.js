@@ -14,6 +14,7 @@ import Dashboard from './pages/Dashboard'
 import LandingPage from './pages/LandingPage'
 import NewInstance from './pages/NewInstance'
 import OpenConnection from './pages/OpenConnection'
+import Logout from './pages/Logout'
 
 const App = () => {
   const [state, dispatch] = useState({auth: false})
@@ -33,6 +34,9 @@ const App = () => {
           </Route>
           <Route path="/chats/:chatId?">
             <Dashboard state={state} dispatch={dispatch} />
+          </Route>
+          <Route path="/logout">
+            <Logout />
           </Route>
         </Switch>
       </BrowserRouter>
