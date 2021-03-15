@@ -7,7 +7,7 @@ const OpenConnection = () => {
 
     useEffect(() => {
         localForage.setItem('zapql-token', token)
-    })
+    }, [])
 
     return token ? <Redirect to="/chats" /> : <Redirect to="/" />            
 }

@@ -14,7 +14,7 @@ const MessageList = ({ messageListData = [], chatId }) => {
     useEffect(() => {
         // Pin scroll to bottom
         document.getElementById('message-list-container').scrollTop = document.getElementById('message-list-container').scrollHeight
-    })
+    }, [messageListData])
 
     return (
         <Container id="message-list-container">

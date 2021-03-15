@@ -23,12 +23,13 @@ const Dashboard = ({ state, dispatch }) => {
 
   useEffect(() => {
     localForage.getItem('zapql-token').then(function(result) {
+      console.log(result)
       if (result === null) return history.push("/registration")
       else return dispatch((previousState) => {
         return {...previousState, auth: true}
       })
     })
-  })
+  }, [])
 
   const [ chatListState, setChatList ] = useState([])
   const { loading: queryLoading, error: queryError, data: queryData } = useQuery( ALL_CHATS_QUERY )
