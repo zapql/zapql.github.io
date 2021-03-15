@@ -9,6 +9,7 @@ import Loading from '../../components/Loading'
 
 import { useQuery } from '@apollo/client'
 import { ALL_CHATS_QUERY } from '../../store/Apollo/ChatList'
+import { CONNECTION_STATE } from '../../store/Apollo/Connection'
 
 import localForage from 'localforage'
 
@@ -23,13 +24,26 @@ const Dashboard = ({ state, dispatch }) => {
 
   useEffect(() => {
     localForage.getItem('zapql-token').then(function(result) {
-      console.log(result)
       if (result === null) return history.push("/registration")
       else return dispatch((previousState) => {
         return {...previousState, auth: true}
       })
     })
   }, [])
+
+  const { loading: connectionLoading, error: connectionError, data: connectionData} = useQuery( CONNECTION_STATE )
+
+  useEffect(() => {
+    if (connectionLoading) {
+      console.log("Loading Connection...")
+    }
+    if (connectionError) {
+      console.log("Connection Error...")
+    }
+    if (connectionData) {
+      if (connectionData.connectionstate === "trashed") return history.push("/registration")
+    }
+  }, [connectionLoading, connectionError, connectionData])
 
   const [ chatListState, setChatList ] = useState([])
   const { loading: queryLoading, error: queryError, data: queryData } = useQuery( ALL_CHATS_QUERY )
