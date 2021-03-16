@@ -14,15 +14,15 @@ import { CONNECTION_STATE } from '../../store/Apollo/Connection'
 import AlertMessage from '../../components/AlertMessage'
 
 import localForage from 'localforage'
+import Fuse from 'fuse.js'
 
-/**
- * TODO: useEffect com Promise.
- * Se retornar query valida no banco, renderiza os componentes.
- * Senao, useHistory().push("/chats"), nao deve poder acessar numero invalido.
- */
 const Dashboard = ({ state, dispatch }) => {
 
   let history = useHistory()
+
+  // SearchBar
+  const [searchState, setSearchState] = useState([])
+  const [searchBarState, setSearchBarState] = useState("")
 
   const [errorState, setErrorState] = useState({open: false, severity: "error", message: ""})
 
@@ -108,6 +108,23 @@ const Dashboard = ({ state, dispatch }) => {
     })
   }, [chatListState])
 
+  useEffect(() => {
+    // New Fuse for SearchBar
+    // TODO: corrigir estrutura final (esta sem metadados)
+    const searchOptions = {
+      // keys: []
+      includeScore: true,
+      threshold: 0.3
+    }
+
+    const fuse = new Fuse(chatListState, searchOptions)
+    setSearchState(() => Array.from(fuse.search(searchBarState), x => x.item))
+
+    // Debug
+    // console.log("BAR STATE: ", searchBarState)
+    // console.log("SEARCH: ", Array.from(fuse.search(searchBarState), x => x.item))
+  }, [setSearchState, searchBarState, chatListState])
+
   return (
     <React.Fragment>
       <AlertMessage state={errorState} dispatch={setErrorState} />
@@ -116,7 +133,7 @@ const Dashboard = ({ state, dispatch }) => {
         ?
         <Row>
           <Side id="Side" data-testid="Side">
-              <ChatList chatListData={chatListState} />
+              <ChatList chatList={chatListState} search={searchState} state={searchBarState} dispatch={setSearchBarState} />
           </Side>
           <Main data-testid="Main">
               {

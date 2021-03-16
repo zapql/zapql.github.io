@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import List from '@material-ui/core/List';
+import SearchBar from './SearchBar'
 
 // TODO: Detectar resize da janela, e ocultar "Side" (ChatList)
 export const Container = styled.div`
@@ -15,12 +16,16 @@ export const Container = styled.div`
   }
 `
 
+export const Search = styled(SearchBar)`
+  max-height: 6vh;
+`
+
 export const ContactList = styled(List)`
   position: relative;
   display: flex;
   flex-direction: column;
   flex: 2;
-  max-height: 87vh;
+  max-height: 75vh;
   
   overflow-x: hidden;
   overflow-y: auto;
@@ -42,7 +47,8 @@ export const ContactList = styled(List)`
 `
 
 export const DivToolbar = styled.div`
-    height: 10vh;
+  height: 10vh;
+  max-height: 10vh;
 `
 
 export const ChatPicture = styled.img`
