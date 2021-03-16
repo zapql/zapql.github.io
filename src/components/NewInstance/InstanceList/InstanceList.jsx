@@ -9,6 +9,19 @@ import AddAPhotoIcon from '@material-ui/icons/AddAPhoto'
 import {Container, IList, IButton} from './InstanceListStyle'
 import { useHistory } from 'react-router'
 
+/**
+ * Componente que exibe a primeira estapa de Registro de Instância.
+ * 
+ * Uma lista de instâncias registradas é exibida, o usuário pode clicar
+ * para autenticar (reconnect) e utilizar a instância requisitada.
+ * 
+ * Um botão atualiza o Estado para exibir a próxima etapa de registro.
+ * 
+ * @param {state, dispatch} Recebe e envia Estado com etapa de registro e qrCode gerado
+ * @param {STATUS} Dicionário para recuperar o nome correto da etapa
+ * @param {deleteInstance} Função para deletar instância listada
+ * @returns Container primeira etapa de registro de instância
+ */
 const InstanceList = ({state, dispatch, STATUS, deleteInstance}) => {
 
     const createNewInstance = () => {

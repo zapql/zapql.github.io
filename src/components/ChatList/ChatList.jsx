@@ -6,6 +6,18 @@ import { DivToolbar, ChatPicture, ChatInfo, ChatName, MessageContent, MessageDat
 import { Link } from 'react-router-dom';
 
 // TODO: Recuperar estrutura final de chat
+/**
+ * Esse componente é responsável por exibir toda a parte esquerda da tela do Dashboard.
+ * 
+ * DivToolbar: Componente responsável por exibir o top do ChatList, como switches.
+ * Search: Componente responsável por receber parâmetro de filtro para o ChatList.
+ * ContactList: Componente responsável por mapear e listar o parâmetro chatList.
+ * 
+ * @param {chatList} Array de contatos // TODO: deve ser um objeto
+ * @param {search} Estado com contatos filtrados
+ * @param {state, dispatch} Estados para o valor do Input do SearchBar
+ * @returns Lista de chats
+ */
 const ChatList = ({ chatList, search, state, dispatch }) => {
     
     let chatListData = !search.length ? chatList : search

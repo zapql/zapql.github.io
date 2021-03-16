@@ -1,9 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import { useHistory } from 'react-router'
 
-import InstanceList from '../../components/NewInstance/InstanceList'
-import InstanceRegistration from '../../components/NewInstance/InstanceRegistration'
-import InstanceReadCode from '../../components/NewInstance/InstanceReadCode'
+import { InstanceList, InstanceRegistration, InstanceReadCode } from '../../components/NewInstance'
 import {Container, Form} from './NewInstanceStyle'
 
 import AlertMessage from '../../components/AlertMessage'

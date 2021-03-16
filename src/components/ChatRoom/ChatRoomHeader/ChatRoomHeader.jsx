@@ -1,6 +1,13 @@
 import React from 'react';
 import { Navbar, Container, Picture, Name } from './ChatRoomHeaderStyle'
 
+/**
+ * Esse componente é responsável por organizar e exibir 
+ * os metadados de contato no topo da tela como um cabeçalho.
+ * 
+ * @param {chatHeaderData} Metadados de contato
+ * @returns Header div Component
+ */
 const ChatRoomHeader = ({ chatHeaderData }) => {
     return (
         <div data-testid="chat-header-outer-div">

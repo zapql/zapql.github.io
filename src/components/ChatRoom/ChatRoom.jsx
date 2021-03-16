@@ -17,6 +17,14 @@ const disableMessageInput = (bool) => {
     document.getElementById("send-button").disabled = bool
 }
 
+/**
+ * Esse componente exibe tudo do lado direito do Dashboard.
+ * Header, MessageList e MessageInput.
+ * 
+ * @param {chatRoomData} Dicionário do contato atual (id, info, messages)
+ * @param {dispatch} Dispatch do Estado Base da aplicação (vem do App.js)
+ * @returns Sala de Chat
+ */
 const ChatRoom = ({ chatRoomData = {id:"", info: {}, messages: []}, dispatch }) => {
 
     const [ inputState, setInputState ] = useState({});
@@ -62,6 +70,7 @@ const ChatRoom = ({ chatRoomData = {id:"", info: {}, messages: []}, dispatch }) 
             document.getElementById('message-input').focus()
 
             return dispatch((previousState) => {
+                // TODO: Organizar todas as aparições desse Dispatch no mesmo lugar (evitar reescrita, especialmente se trocar design dos dados)
                 // TODO: validar se estrutura sera final
                 return ( 
                     {...previousState, 

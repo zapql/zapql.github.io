@@ -5,6 +5,19 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import Search from '@material-ui/icons/Search'
 import Divider from '@material-ui/core/Divider';
 
+/**
+ * Esse componente serve como Input para busca de contatos.
+ * 
+ * O componente possui um Estado de escopo local, e um Estado recebido por props.
+ * 
+ * Seu Estado local cuida apenas de uma transição de cor do background,
+ * semelhante ao que ocorre no WhatsApp Web.
+ * 
+ * O Estado externo cuida do valor do Input.
+ * 
+ * @param {state, dispatch} Recebe e envia Estado com valor do input 
+ * @returns Input Component
+ */
 const SearchBar = ({ state, dispatch }) => {
 
     const [searchBackgroundState, setSearchBackgroundState] = useState(false)

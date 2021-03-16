@@ -2,6 +2,15 @@ import React, { useEffect } from 'react'
 import SendIcon from './SendIcon'
 import { Container, ActualInput, SendButton } from './MessageInputStyle'
 
+// TODO: alterar para state/dispatch?
+/**
+ * Componente responsável por organizar e exibir o Container de Input de Mensagens.
+ * 
+ * @param {onMessage} Dispatch da Mutation. 
+ * @param {chatId} Número de telefone do chat atualmente aberto.
+ * @param {inputState, setInputState} Recebe e envia o Estado local com valor do input.
+ * @returns Container Component: Message Input
+ */
 const MessageInput = ( { onMessage, chatId, inputState, setInputState } ) => {
 
     useEffect(() => {

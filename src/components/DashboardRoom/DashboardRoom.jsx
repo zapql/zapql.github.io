@@ -1,6 +1,12 @@
 import React from 'react'
 import { Container, MainContainer, MainContainerIcon, FirstText, SecondText } from './DashboardRoomStyle'
 
+/**
+ * Esse componente exibe a sala inicial do Dashboard.
+ * Como não há nenhum contato selecionado, ele exibe a mesma mensagem do WhatsApp Web.
+ * 
+ * @returns Sala "Keep your phone connected"
+ */
 const DashboardRoom = () => {
 
     return (

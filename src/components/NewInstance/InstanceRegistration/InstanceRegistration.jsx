@@ -3,6 +3,14 @@ import React from 'react'
 import {Container, PanelTOC, IButton} from './InstanceRegistrationStyle'
 import TOC from './toc-example'
 
+/**
+ * Componente que exibe a segunda etapa de registro de instância.
+ * 
+ * @param {sendSignUpMutation} Dispatch de Mutation para gerar QR Code
+ * @param {dispatch} Dispatch para atualizar o Estado com a etapa de registro
+ * @param {STATUS} Dicionário para recuperar o nome correto da etapa
+ * @returns Container com segunda etapa de registro de instância
+ */
 const InstanceRegistration = ({sendSignUpMutation, dispatch, STATUS}) => {
 
     const generateQRCode = () => {
