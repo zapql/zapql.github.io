@@ -15,6 +15,7 @@ import LandingPage from './pages/LandingPage'
 import NewInstance from './pages/NewInstance'
 import OpenConnection from './pages/OpenConnection'
 import Logout from './pages/Logout'
+import DoAuth from './pages/DoAuth';
 
 const App = () => {
   const [state, dispatch] = useState({auth: false})
@@ -31,6 +32,9 @@ const App = () => {
           </Route>
           <Route path="/open/:token?">
             <OpenConnection />
+          </Route>
+          <Route path="/auth">
+            <DoAuth />
           </Route>
           <Route path="/chats/:chatId?">
             <Dashboard state={state} dispatch={dispatch} />
