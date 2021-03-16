@@ -30,6 +30,17 @@ const NewInstance = () => {
     const [sendSignUpMutation, { loading: signupLoading, error: signupError, data: signupData }] = useMutation(SIGN_UP_CONNECTION, { onError: () => {} })
     const [sendQrCodeMutation, { loading: qrCodeLoading, error: qrCodeError, data: qrCodeData }] = useMutation(LAST_QR_CODE, { onError: () => {} })
 
+    const [instanceState, setInstanceState] = useState({})
+
+    useEffect(() => {
+        localForage.getItem('instance-list')
+        .then((result) => {
+            setInstanceState(() => {
+                return {...result}
+            })
+        })
+    }, [])
+
     useEffect(() => {
         if (signupLoading) {
             console.log("Loading Signup...")
@@ -80,16 +91,21 @@ const NewInstance = () => {
                 return sendSignUpMutation()
             }
             else {
-                localForage.setItem("instances", {
-                    [qrCodeData.lastqrcode.userinfo.number]: {
-                        avatar: qrCodeData.lastqrcode.userinfo.avatar,
-                        name: qrCodeData.lastqrcode.userinfo.name,
-                        number: qrCodeData.lastqrcode.userinfo.number,
-                        jwt: qrCodeData.lastqrcode.jwt
-                    }
-                })
-                .then(() => {
-                    history.push(`/open/${qrCodeData.lastqrcode.jwt}`)
+                // TODO: conferir se nao esta sobrepondo
+                localForage.getItem('instance-list')
+                .then((result) => {
+                    localForage.setItem("instance-list", {
+                        ...result,
+                        [qrCodeData.lastqrcode.userinfo.number]: {
+                            avatar: qrCodeData.lastqrcode.userinfo.avatar,
+                            name: qrCodeData.lastqrcode.userinfo.name,
+                            number: qrCodeData.lastqrcode.userinfo.number,
+                            jwt: qrCodeData.lastqrcode.jwt
+                        }
+                    })
+                    .then(() => {
+                        history.push(`/open/${qrCodeData.lastqrcode.jwt}`)
+                    })
                 })
             }
         }
@@ -100,7 +116,7 @@ const NewInstance = () => {
             <AlertMessage state={errorState} dispatch={setErrorState} />
             <Form>
                 {registrationState.status === STATUS.LIST 
-                ? <InstanceList dispatch={setRegistrationState} STATUS={STATUS} />
+                ? <InstanceList state={instanceState} dispatch={setRegistrationState} STATUS={STATUS} />
                 : ""}
                 
                 {registrationState.status === STATUS.CREATE
