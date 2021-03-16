@@ -11,9 +11,9 @@ import { Link } from 'react-router-dom';
 const ChatList = ({ chatListData = {contacts: {}, chats: {}} }) => {
     
     return(
-        <Container data-testid="Conteiner">
+        <Container data-testid="Container">
             <DivToolbar />
-            <SearchBar />
+            {/* <SearchBar /> */}
             <Divider />
                 {/* <List>
                     {chatListData.map((contact) => (
