@@ -111,12 +111,25 @@ const NewInstance = () => {
         }
     }, [qrCodeLoading, qrCodeError, qrCodeData])
 
+    const deleteInstance = (key) => {
+        localForage.getItem('instance-list')
+        .then((instanceList) => {
+            delete instanceList[key]
+            localForage.setItem('instance-list', {...instanceList})
+            .then((newInstanceList) => {
+                setInstanceState((previousState) => {
+                    return {...newInstanceList}
+                })
+            })
+        })
+    }
+
     return (
         <Container container>
             <AlertMessage state={errorState} dispatch={setErrorState} />
             <Form>
                 {registrationState.status === STATUS.LIST 
-                ? <InstanceList state={instanceState} dispatch={setRegistrationState} STATUS={STATUS} />
+                ? <InstanceList state={instanceState} dispatch={setRegistrationState} STATUS={STATUS} deleteInstance={deleteInstance} />
                 : ""}
                 
                 {registrationState.status === STATUS.CREATE
