@@ -11,6 +11,8 @@ import { useQuery } from '@apollo/client'
 import { ALL_CHATS_QUERY } from '../../store/Apollo/ChatList'
 import { CONNECTION_STATE } from '../../store/Apollo/Connection'
 
+import AlertMessage from '../../components/AlertMessage'
+
 import localForage from 'localforage'
 
 /**
@@ -22,6 +24,10 @@ const Dashboard = ({ state, dispatch }) => {
 
   let history = useHistory()
 
+  const [errorState, setErrorState] = useState({open: false, severity: "error", message: ""})
+
+  const { loading: connectionLoading, error: connectionError, data: connectionData} = useQuery( CONNECTION_STATE )
+
   useEffect(() => {
     localForage.getItem('zapql-token').then(function(result) {
       if (result === null) return history.push("/registration")
@@ -29,19 +35,34 @@ const Dashboard = ({ state, dispatch }) => {
         return {...previousState, auth: true}
       })
     })
-  }, [])
-
-  const { loading: connectionLoading, error: connectionError, data: connectionData} = useQuery( CONNECTION_STATE )
-
-  useEffect(() => {
+    
     if (connectionLoading) {
       console.log("Loading Connection...")
     }
     if (connectionError) {
       console.log("Connection Error...")
+      if (connectionError.message === "do auth") {
+        setErrorState(() => {
+          return {
+            open: true,
+            severity: "warning",
+            message: "Token Não Autenticado..."
+          }
+        })
+        setTimeout(function(){ history.push("/registration") }, 1000);
+      }
     }
     if (connectionData) {
-      if (connectionData.connectionstate === "trashed") return history.push("/registration")
+      if (connectionData.connectionstate === "trashed") {
+        setErrorState(() => {
+          return {
+            open: true,
+            severity: "warning",
+            message: "Sessão Expirada..."
+          }
+        })
+        setTimeout(function(){ history.push("/registration") }, 1000);
+      }
     }
   }, [connectionLoading, connectionError, connectionData])
 
@@ -89,6 +110,7 @@ const Dashboard = ({ state, dispatch }) => {
 
   return (
     <React.Fragment>
+      <AlertMessage state={errorState} dispatch={setErrorState} />
       {
         state.auth
         ?
