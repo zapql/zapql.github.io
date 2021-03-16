@@ -31,6 +31,7 @@ const MessageInput = ( { onMessage, chatId, inputState, setInputState } ) => {
                 data-testid="message-input"
                 id="message-input"
                 type="text"
+                autoComplete='off'
                 placeholder="Type a message"
                 value={inputState[chatId] || ''}
                 onKeyPress={onKeyPress}
